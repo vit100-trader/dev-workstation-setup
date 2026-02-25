@@ -1,0 +1,695 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<appcmd>
+
+  <APPPOOL APPPOOL.NAME="Classic .NET AppPool" PipelineMode="Classic" RuntimeVersion="v2.0" state="Started">
+
+    <add name="Classic .NET AppPool" managedRuntimeVersion="v2.0" managedPipelineMode="Classic">
+
+      <processModel />
+
+      <recycling>
+
+        <periodicRestart>
+
+          <schedule>
+
+          </schedule>
+
+        </periodicRestart>
+
+      </recycling>
+
+      <failure />
+
+      <cpu />
+
+      <environmentVariables>
+
+      </environmentVariables>
+
+    </add>
+
+  </APPPOOL>
+
+  <APPPOOL APPPOOL.NAME=".NET v2.0 Classic" PipelineMode="Classic" RuntimeVersion="v2.0" state="Started">
+
+    <add name=".NET v2.0 Classic" enable32BitAppOnWin64="true" managedRuntimeVersion="v2.0" managedPipelineMode="Classic">
+
+      <processModel />
+
+      <recycling>
+
+        <periodicRestart>
+
+          <schedule>
+
+          </schedule>
+
+        </periodicRestart>
+
+      </recycling>
+
+      <failure />
+
+      <cpu />
+
+      <environmentVariables>
+
+      </environmentVariables>
+
+    </add>
+
+  </APPPOOL>
+
+  <APPPOOL APPPOOL.NAME=".NET v2.0" PipelineMode="Integrated" RuntimeVersion="v2.0" state="Started">
+
+    <add name=".NET v2.0" enable32BitAppOnWin64="true" managedRuntimeVersion="v2.0">
+
+      <processModel />
+
+      <recycling>
+
+        <periodicRestart>
+
+          <schedule>
+
+          </schedule>
+
+        </periodicRestart>
+
+      </recycling>
+
+      <failure />
+
+      <cpu />
+
+      <environmentVariables>
+
+      </environmentVariables>
+
+    </add>
+
+  </APPPOOL>
+
+  <APPPOOL APPPOOL.NAME="ASP.NET V2.0 Integrated" PipelineMode="Integrated" RuntimeVersion="v2.0" state="Started">
+
+    <add name="ASP.NET V2.0 Integrated" autoStart="true" enable32BitAppOnWin64="true" managedRuntimeVersion="v2.0" managedPipelineMode="Integrated">
+
+      <processModel />
+
+      <recycling>
+
+        <periodicRestart>
+
+          <schedule>
+
+          </schedule>
+
+        </periodicRestart>
+
+      </recycling>
+
+      <failure />
+
+      <cpu />
+
+      <environmentVariables>
+
+      </environmentVariables>
+
+    </add>
+
+  </APPPOOL>
+
+  <APPPOOL APPPOOL.NAME="DealerTrackCanadaX86" PipelineMode="Classic" RuntimeVersion="v4.0" state="Started">
+
+    <add name="DealerTrackCanadaX86" autoStart="true" enable32BitAppOnWin64="true" managedRuntimeVersion="v4.0" managedPipelineMode="Classic" startMode="OnDemand">
+
+      <processModel identityType="NetworkService" loadUserProfile="true" pingingEnabled="true" pingResponseTime="16:40:00" />
+
+      <recycling>
+
+        <periodicRestart>
+
+          <schedule>
+
+          </schedule>
+
+        </periodicRestart>
+
+      </recycling>
+
+      <failure />
+
+      <cpu />
+
+      <environmentVariables>
+
+      </environmentVariables>
+
+    </add>
+
+  </APPPOOL>
+
+  <APPPOOL APPPOOL.NAME="CommonGateway" PipelineMode="Classic" RuntimeVersion="v4.0" state="Started">
+
+    <add name="CommonGateway" autoStart="true" enable32BitAppOnWin64="true" managedRuntimeVersion="v4.0" managedPipelineMode="Classic">
+
+      <processModel identityType="NetworkService" />
+
+      <recycling>
+
+        <periodicRestart>
+
+          <schedule>
+
+          </schedule>
+
+        </periodicRestart>
+
+      </recycling>
+
+      <failure />
+
+      <cpu />
+
+      <environmentVariables>
+
+      </environmentVariables>
+
+    </add>
+
+  </APPPOOL>
+
+  <APPPOOL APPPOOL.NAME="payout" PipelineMode="Integrated" RuntimeVersion="v4.0" state="Started">
+
+    <add name="payout" autoStart="true" enable32BitAppOnWin64="true" managedRuntimeVersion="v4.0">
+
+      <processModel identityType="NetworkService" />
+
+      <recycling>
+
+        <periodicRestart>
+
+          <schedule>
+
+          </schedule>
+
+        </periodicRestart>
+
+      </recycling>
+
+      <failure />
+
+      <cpu />
+
+      <environmentVariables>
+
+      </environmentVariables>
+
+    </add>
+
+  </APPPOOL>
+
+  <APPPOOL APPPOOL.NAME="Status" PipelineMode="Classic" RuntimeVersion="v4.0" state="Started">
+
+    <add name="Status" autoStart="true" enable32BitAppOnWin64="true" managedRuntimeVersion="v4.0" managedPipelineMode="Classic">
+
+      <processModel identityType="NetworkService" loadUserProfile="true" />
+
+      <recycling>
+
+        <periodicRestart>
+
+          <schedule>
+
+          </schedule>
+
+        </periodicRestart>
+
+      </recycling>
+
+      <failure />
+
+      <cpu />
+
+      <environmentVariables>
+
+      </environmentVariables>
+
+    </add>
+
+  </APPPOOL>
+
+  <APPPOOL APPPOOL.NAME="ASP.NET v4.0" PipelineMode="Integrated" RuntimeVersion="v4.0" state="Started">
+
+    <add name="ASP.NET v4.0" managedRuntimeVersion="v4.0">
+
+      <processModel />
+
+      <recycling>
+
+        <periodicRestart>
+
+          <schedule>
+
+          </schedule>
+
+        </periodicRestart>
+
+      </recycling>
+
+      <failure />
+
+      <cpu />
+
+      <environmentVariables>
+
+      </environmentVariables>
+
+    </add>
+
+  </APPPOOL>
+
+  <APPPOOL APPPOOL.NAME="ASP.NET v4.0 Classic" PipelineMode="Classic" RuntimeVersion="v4.0" state="Started">
+
+    <add name="ASP.NET v4.0 Classic" autoStart="true" enable32BitAppOnWin64="true" managedRuntimeVersion="v4.0" managedPipelineMode="Classic">
+
+      <processModel identityType="NetworkService" />
+
+      <recycling>
+
+        <periodicRestart>
+
+          <schedule>
+
+          </schedule>
+
+        </periodicRestart>
+
+      </recycling>
+
+      <failure />
+
+      <cpu />
+
+      <environmentVariables>
+
+      </environmentVariables>
+
+    </add>
+
+  </APPPOOL>
+
+  <APPPOOL APPPOOL.NAME="DMSAPI" PipelineMode="Classic" RuntimeVersion="v4.0" state="Started">
+
+    <add name="DMSAPI" autoStart="true" enable32BitAppOnWin64="true" managedRuntimeVersion="v4.0" managedPipelineMode="Classic">
+
+      <processModel identityType="NetworkService" />
+
+      <recycling>
+
+        <periodicRestart>
+
+          <schedule>
+
+          </schedule>
+
+        </periodicRestart>
+
+      </recycling>
+
+      <failure />
+
+      <cpu />
+
+      <environmentVariables>
+
+      </environmentVariables>
+
+    </add>
+
+  </APPPOOL>
+
+  <APPPOOL APPPOOL.NAME="ExtRbc" PipelineMode="Classic" RuntimeVersion="v4.0" state="Started">
+
+    <add name="ExtRbc" autoStart="true" enable32BitAppOnWin64="true" managedRuntimeVersion="v4.0" managedPipelineMode="Classic">
+
+      <processModel identityType="NetworkService" />
+
+      <recycling>
+
+        <periodicRestart>
+
+          <schedule>
+
+          </schedule>
+
+        </periodicRestart>
+
+      </recycling>
+
+      <failure />
+
+      <cpu />
+
+      <environmentVariables>
+
+      </environmentVariables>
+
+    </add>
+
+  </APPPOOL>
+
+  <APPPOOL APPPOOL.NAME=".NET v4.5 Classic" PipelineMode="Classic" RuntimeVersion="v4.0" state="Started">
+
+    <add name=".NET v4.5 Classic" managedRuntimeVersion="v4.0" managedPipelineMode="Classic">
+
+      <processModel />
+
+      <recycling>
+
+        <periodicRestart>
+
+          <schedule>
+
+          </schedule>
+
+        </periodicRestart>
+
+      </recycling>
+
+      <failure />
+
+      <cpu />
+
+      <environmentVariables>
+
+      </environmentVariables>
+
+    </add>
+
+  </APPPOOL>
+
+  <APPPOOL APPPOOL.NAME=".NET v4.5" PipelineMode="Integrated" RuntimeVersion="v4.0" state="Started">
+
+    <add name=".NET v4.5" managedRuntimeVersion="v4.0" managedPipelineMode="Integrated">
+
+      <processModel />
+
+      <recycling>
+
+        <periodicRestart>
+
+          <schedule>
+
+          </schedule>
+
+        </periodicRestart>
+
+      </recycling>
+
+      <failure />
+
+      <cpu />
+
+      <environmentVariables>
+
+      </environmentVariables>
+
+    </add>
+
+  </APPPOOL>
+
+  <APPPOOL APPPOOL.NAME="ExternalCommTLC" PipelineMode="Classic" RuntimeVersion="v4.0" state="Started">
+
+    <add name="ExternalCommTLC" enable32BitAppOnWin64="true" managedPipelineMode="Classic" startMode="AlwaysRunning">
+
+      <processModel identityType="NetworkService" />
+
+      <recycling>
+
+        <periodicRestart>
+
+          <schedule>
+
+          </schedule>
+
+        </periodicRestart>
+
+      </recycling>
+
+      <failure />
+
+      <cpu />
+
+      <environmentVariables>
+
+      </environmentVariables>
+
+    </add>
+
+  </APPPOOL>
+
+  <APPPOOL APPPOOL.NAME="ExternalCommATB" PipelineMode="Classic" RuntimeVersion="v4.0" state="Started">
+
+    <add name="ExternalCommATB" enable32BitAppOnWin64="true" managedPipelineMode="Classic" startMode="AlwaysRunning">
+
+      <processModel identityType="NetworkService" />
+
+      <recycling>
+
+        <periodicRestart>
+
+          <schedule>
+
+          </schedule>
+
+        </periodicRestart>
+
+      </recycling>
+
+      <failure />
+
+      <cpu />
+
+      <environmentVariables>
+
+      </environmentVariables>
+
+    </add>
+
+  </APPPOOL>
+
+  <APPPOOL APPPOOL.NAME="Core" PipelineMode="Classic" RuntimeVersion="v4.0" state="Started">
+
+    <add name="Core" autoStart="true" enable32BitAppOnWin64="true" managedRuntimeVersion="v4.0" managedPipelineMode="Classic">
+
+      <processModel identityType="NetworkService" />
+
+      <recycling>
+
+        <periodicRestart>
+
+          <schedule>
+
+          </schedule>
+
+        </periodicRestart>
+
+      </recycling>
+
+      <failure />
+
+      <cpu />
+
+      <environmentVariables>
+
+      </environmentVariables>
+
+    </add>
+
+  </APPPOOL>
+
+  <APPPOOL APPPOOL.NAME="LSAAPI" PipelineMode="Classic" RuntimeVersion="v4.0" state="Started">
+
+    <add name="LSAAPI" autoStart="true" enable32BitAppOnWin64="true" managedRuntimeVersion="v4.0" managedPipelineMode="Classic">
+
+      <processModel identityType="NetworkService" />
+
+      <recycling>
+
+        <periodicRestart>
+
+          <schedule>
+
+          </schedule>
+
+        </periodicRestart>
+
+      </recycling>
+
+      <failure />
+
+      <cpu />
+
+      <environmentVariables>
+
+      </environmentVariables>
+
+    </add>
+
+  </APPPOOL>
+
+  <APPPOOL APPPOOL.NAME="DtcanadaLSA" PipelineMode="Classic" RuntimeVersion="v2.0" state="Started">
+
+    <add name="DtcanadaLSA" enable32BitAppOnWin64="true" managedRuntimeVersion="v2.0" managedPipelineMode="Classic" startMode="AlwaysRunning">
+
+      <processModel identityType="NetworkService" />
+
+      <recycling>
+
+        <periodicRestart>
+
+          <schedule>
+
+          </schedule>
+
+        </periodicRestart>
+
+      </recycling>
+
+      <failure />
+
+      <cpu />
+
+      <environmentVariables>
+
+      </environmentVariables>
+
+    </add>
+
+  </APPPOOL>
+
+  <APPPOOL APPPOOL.NAME="LSAApplications" PipelineMode="Classic" RuntimeVersion="v4.0" state="Started">
+
+    <add name="LSAApplications" enable32BitAppOnWin64="true" managedPipelineMode="Classic" startMode="AlwaysRunning">
+
+      <processModel identityType="NetworkService" />
+
+      <recycling>
+
+        <periodicRestart>
+
+          <schedule>
+
+          </schedule>
+
+        </periodicRestart>
+
+      </recycling>
+
+      <failure />
+
+      <cpu />
+
+      <environmentVariables>
+
+      </environmentVariables>
+
+    </add>
+
+  </APPPOOL>
+
+  <APPPOOL APPPOOL.NAME="ExternalCommDMS" PipelineMode="Classic" RuntimeVersion="v4.0" state="Started">
+
+    <add name="ExternalCommDMS" queueLength="500" autoStart="true" enable32BitAppOnWin64="true" managedRuntimeVersion="v4.0" managedPipelineMode="Classic">
+
+      <processModel loadUserProfile="true" idleTimeout="00:00:00" />
+
+      <recycling>
+
+        <periodicRestart>
+
+          <schedule>
+
+          </schedule>
+
+        </periodicRestart>
+
+      </recycling>
+
+      <failure />
+
+      <cpu />
+
+      <environmentVariables>
+
+      </environmentVariables>
+
+    </add>
+
+  </APPPOOL>
+
+  <APPPOOL APPPOOL.NAME="CreditBureau" PipelineMode="Classic" RuntimeVersion="v4.0" state="Started">
+
+    <add name="CreditBureau" autoStart="true" enable32BitAppOnWin64="true" managedRuntimeVersion="v4.0" managedPipelineMode="Classic">
+
+      <processModel identityType="NetworkService" />
+
+      <recycling>
+
+        <periodicRestart>
+
+          <schedule>
+
+          </schedule>
+
+        </periodicRestart>
+
+      </recycling>
+
+      <failure />
+
+      <cpu />
+
+      <environmentVariables>
+
+      </environmentVariables>
+
+    </add>
+
+  </APPPOOL>
+
+  <APPPOOL APPPOOL.NAME="DTN.Micro.Central" PipelineMode="Integrated" RuntimeVersion="v4.0" state="Started">
+
+    <add name="DTN.Micro.Central" enable32BitAppOnWin64="true">
+
+      <processModel identityType="NetworkService" />
+
+      <recycling>
+
+        <periodicRestart>
+
+          <schedule>
+
+          </schedule>
+
+        </periodicRestart>
+
+      </recycling>
+
+      <failure />
+
+      <cpu />
+
+      <environmentVariables>
+
+      </environmentVariables>
+
+    </add>
+
+  </APPPOOL>
+
+</appcmd>

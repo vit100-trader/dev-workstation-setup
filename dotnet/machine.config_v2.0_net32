@@ -1,0 +1,359 @@
+<?xml version="1.0"?>
+<!--
+    Please refer to machine.config.comments for a description and
+    the default values of each configuration section.
+
+    For a full documentation of the schema please refer to
+    http://go.microsoft.com/fwlink/?LinkId=42127
+
+    To improve performance, machine.config should contain only those
+    settings that differ from their defaults.
+-->
+<configuration>
+  <configSections>
+    <section name="oracle.dataaccess.client" type="System.Data.Common.DbProviderConfigurationHandler, System.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <section name="dealertrack_commonsettings" type="DealerTrack.CommonObjects.CustomItemHandler.MyConfig.MyConfigSectionHandler,DealerTrack.CommonObjects.CustomItemHandler" />
+    <section name="appSettings" type="System.Configuration.AppSettingsSection, System.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" restartOnExternalChanges="false" requirePermission="false" />
+    <section name="connectionStrings" type="System.Configuration.ConnectionStringsSection, System.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" requirePermission="false" />
+    <section name="mscorlib" type="System.Configuration.IgnoreSection, System.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowLocation="false" />
+    <section name="runtime" type="System.Configuration.IgnoreSection, System.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowLocation="false" />
+    <section name="assemblyBinding" type="System.Configuration.IgnoreSection, System.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowLocation="false" />
+    <section name="satelliteassemblies" type="System.Configuration.IgnoreSection, System.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowLocation="false" />
+    <section name="startup" type="System.Configuration.IgnoreSection, System.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowLocation="false" />
+    <section name="system.codedom" type="System.CodeDom.Compiler.CodeDomConfigurationHandler, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <section name="system.data" type="System.Data.Common.DbProviderFactoriesConfigurationHandler, System.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <section name="system.data.dataset" type="System.Configuration.NameValueFileSectionHandler, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" restartOnExternalChanges="false" />
+    <section name="system.data.odbc" type="System.Data.Common.DbProviderConfigurationHandler, System.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <section name="system.data.oledb" type="System.Data.Common.DbProviderConfigurationHandler, System.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <section name="system.data.oracleclient" type="System.Data.Common.DbProviderConfigurationHandler, System.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <section name="system.data.sqlclient" type="System.Data.Common.DbProviderConfigurationHandler, System.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <section name="system.diagnostics" type="System.Diagnostics.SystemDiagnosticsSection, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <section name="system.runtime.remoting" type="System.Configuration.IgnoreSection, System.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowLocation="false" />
+    <section name="system.windows.forms" type="System.Windows.Forms.WindowsFormsSection, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <section name="windows" type="System.Configuration.IgnoreSection, System.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowLocation="false" />
+    <sectionGroup name="system.xml.serialization" type="System.Xml.Serialization.Configuration.SerializationSectionGroup, System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <section name="schemaImporterExtensions" type="System.Xml.Serialization.Configuration.SchemaImporterExtensionsSection, System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+      <section name="dateTimeSerialization" type="System.Xml.Serialization.Configuration.DateTimeSerializationSection, System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+      <section name="xmlSerializer" type="System.Xml.Serialization.Configuration.XmlSerializerSection, System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+    </sectionGroup>
+    <sectionGroup name="system.net" type="System.Net.Configuration.NetSectionGroup, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <section name="authenticationModules" type="System.Net.Configuration.AuthenticationModulesSection, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+      <section name="connectionManagement" type="System.Net.Configuration.ConnectionManagementSection, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+      <section name="defaultProxy" type="System.Net.Configuration.DefaultProxySection, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+      <sectionGroup name="mailSettings" type="System.Net.Configuration.MailSettingsSectionGroup, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+        <section name="smtp" type="System.Net.Configuration.SmtpSection, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+      </sectionGroup>
+      <section name="requestCaching" type="System.Net.Configuration.RequestCachingSection, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+      <section name="settings" type="System.Net.Configuration.SettingsSection, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+      <section name="webRequestModules" type="System.Net.Configuration.WebRequestModulesSection, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    </sectionGroup>
+    <sectionGroup name="system.transactions" type="System.Transactions.Configuration.TransactionsSectionGroup, System.Transactions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, Custom=null">
+      <section name="defaultSettings" type="System.Transactions.Configuration.DefaultSettingsSection, System.Transactions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, Custom=null" />
+      <section name="machineSettings" type="System.Transactions.Configuration.MachineSettingsSection, System.Transactions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, Custom=null" allowDefinition="MachineOnly" allowExeDefinition="MachineOnly" />
+    </sectionGroup>
+    <sectionGroup name="system.web" type="System.Web.Configuration.SystemWebSectionGroup, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <section name="anonymousIdentification" type="System.Web.Configuration.AnonymousIdentificationSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowDefinition="MachineToApplication" />
+      <section name="authentication" type="System.Web.Configuration.AuthenticationSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowDefinition="MachineToApplication" />
+      <section name="authorization" type="System.Web.Configuration.AuthorizationSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <section name="browserCaps" type="System.Web.Configuration.HttpCapabilitiesSectionHandler, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <section name="clientTarget" type="System.Web.Configuration.ClientTargetSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <section name="compilation" type="System.Web.Configuration.CompilationSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <section name="customErrors" type="System.Web.Configuration.CustomErrorsSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <section name="deployment" type="System.Web.Configuration.DeploymentSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowDefinition="MachineOnly" />
+      <section name="deviceFilters" type="System.Web.Mobile.DeviceFiltersSection, System.Web.Mobile, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <section name="globalization" type="System.Web.Configuration.GlobalizationSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <section name="healthMonitoring" type="System.Web.Configuration.HealthMonitoringSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowDefinition="MachineToApplication" />
+      <section name="hostingEnvironment" type="System.Web.Configuration.HostingEnvironmentSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowDefinition="MachineToApplication" />
+      <section name="httpCookies" type="System.Web.Configuration.HttpCookiesSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <section name="httpHandlers" type="System.Web.Configuration.HttpHandlersSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <section name="httpModules" type="System.Web.Configuration.HttpModulesSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <section name="httpRuntime" type="System.Web.Configuration.HttpRuntimeSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <section name="identity" type="System.Web.Configuration.IdentitySection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <section name="machineKey" type="System.Web.Configuration.MachineKeySection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowDefinition="MachineToApplication" />
+      <section name="membership" type="System.Web.Configuration.MembershipSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowDefinition="MachineToApplication" />
+      <section name="mobileControls" type="System.Web.UI.MobileControls.MobileControlsSection, System.Web.Mobile, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <section name="pages" type="System.Web.Configuration.PagesSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <section name="processModel" type="System.Web.Configuration.ProcessModelSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowDefinition="MachineOnly" allowLocation="false" />
+      <section name="profile" type="System.Web.Configuration.ProfileSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowDefinition="MachineToApplication" />
+      <section name="roleManager" type="System.Web.Configuration.RoleManagerSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowDefinition="MachineToApplication" />
+      <section name="securityPolicy" type="System.Web.Configuration.SecurityPolicySection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowDefinition="MachineToApplication" />
+      <section name="sessionPageState" type="System.Web.Configuration.SessionPageStateSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <section name="sessionState" type="System.Web.Configuration.SessionStateSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowDefinition="MachineToApplication" />
+      <section name="siteMap" type="System.Web.Configuration.SiteMapSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowDefinition="MachineToApplication" />
+      <section name="trace" type="System.Web.Configuration.TraceSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <section name="trust" type="System.Web.Configuration.TrustSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowDefinition="MachineToApplication" />
+      <section name="urlMappings" type="System.Web.Configuration.UrlMappingsSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowDefinition="MachineToApplication" />
+      <section name="webControls" type="System.Web.Configuration.WebControlsSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <section name="webParts" type="System.Web.Configuration.WebPartsSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <section name="webServices" type="System.Web.Services.Configuration.WebServicesSection, System.Web.Services, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <section name="xhtmlConformance" type="System.Web.Configuration.XhtmlConformanceSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <sectionGroup name="caching" type="System.Web.Configuration.SystemWebCachingSectionGroup, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+        <section name="cache" type="System.Web.Configuration.CacheSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowDefinition="MachineToApplication" />
+        <section name="outputCache" type="System.Web.Configuration.OutputCacheSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowDefinition="MachineToApplication" />
+        <section name="outputCacheSettings" type="System.Web.Configuration.OutputCacheSettingsSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowDefinition="MachineToApplication" />
+        <section name="sqlCacheDependency" type="System.Web.Configuration.SqlCacheDependencySection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowDefinition="MachineToApplication" />
+      </sectionGroup>
+      <section name="protocols" type="System.Web.Configuration.ProtocolsSection, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" allowDefinition="MachineToWebRoot" />
+    </sectionGroup>
+    <section name="system.webServer" type="System.Configuration.IgnoreSection, System.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <sectionGroup name="system.runtime.serialization" type="System.Runtime.Serialization.Configuration.SerializationSectionGroup, System.Runtime.Serialization, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <section name="dataContractSerializer" type="System.Runtime.Serialization.Configuration.DataContractSerializerSection, System.Runtime.Serialization, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    </sectionGroup>
+    <sectionGroup name="system.serviceModel" type="System.ServiceModel.Configuration.ServiceModelSectionGroup, System.ServiceModel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <section name="behaviors" type="System.ServiceModel.Configuration.BehaviorsSection, System.ServiceModel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+      <section name="bindings" type="System.ServiceModel.Configuration.BindingsSection, System.ServiceModel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+      <section name="client" type="System.ServiceModel.Configuration.ClientSection, System.ServiceModel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+      <section name="comContracts" type="System.ServiceModel.Configuration.ComContractsSection, System.ServiceModel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+      <section name="commonBehaviors" type="System.ServiceModel.Configuration.CommonBehaviorsSection, System.ServiceModel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowDefinition="MachineOnly" allowExeDefinition="MachineOnly" />
+      <section name="diagnostics" type="System.ServiceModel.Configuration.DiagnosticSection, System.ServiceModel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+      <section name="extensions" type="System.ServiceModel.Configuration.ExtensionsSection, System.ServiceModel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+      <section name="machineSettings" type="System.ServiceModel.Configuration.MachineSettingsSection, SMDiagnostics, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowDefinition="MachineOnly" allowExeDefinition="MachineOnly" />
+      <section name="serviceHostingEnvironment" type="System.ServiceModel.Configuration.ServiceHostingEnvironmentSection, System.ServiceModel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+      <section name="services" type="System.ServiceModel.Configuration.ServicesSection, System.ServiceModel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    </sectionGroup>
+    <sectionGroup name="system.serviceModel.activation" type="System.ServiceModel.Activation.Configuration.ServiceModelActivationSectionGroup, System.ServiceModel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <section name="diagnostics" type="System.ServiceModel.Activation.Configuration.DiagnosticSection, System.ServiceModel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+      <section name="net.pipe" type="System.ServiceModel.Activation.Configuration.NetPipeSection, System.ServiceModel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+      <section name="net.tcp" type="System.ServiceModel.Activation.Configuration.NetTcpSection, System.ServiceModel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    </sectionGroup>
+  </configSections>
+  <appSettings>
+    <add key="environment" value="dev" />
+    <add key="server_type" value="web" />
+    <add key="country" value="CAN" />
+    <add key="menu_count" value="19" />
+    <add key="menu_countCAN" value="5" />
+    <add key="menu_countSNCAN" value="0" />
+    <add key="menuCAN1" value="C:\Inetpub\wwwroot\menus\menu_Hide_canada.xml" />
+    <add key="menuCAN2" value="C:\Inetpub\wwwroot\menus\menu_Main_canada.xml" />
+    <add key="menuCAN3" value="C:\Inetpub\wwwroot\menus\menu_Admin_canada.xml" />
+    <add key="menuCAN4" value="C:\Inetpub\wwwroot\menus\menu_refer_canada.xml" />
+    <add key="menuCAN5" value="C:\Inetpub\wwwroot\menus\menu_aftermarket_canada.xml" />
+    <add key="menu1" value="C:\Inetpub\wwwroot\menus\menu_Hide.xml" />
+    <add key="menu2" value="C:\Inetpub\wwwroot\menus\menu_Apps.xml" />
+    <add key="menu3" value="C:\Inetpub\wwwroot\menus\menu_Reports.xml" />
+    <add key="menu4" value="C:\Inetpub\wwwroot\menus\menu_Rates.xml" />
+    <add key="menu5" value="C:\Inetpub\wwwroot\menus\menu_payoff.xml" />
+    <add key="menu6" value="C:\Inetpub\wwwroot\menus\menu_DealerWire.xml" />
+    <add key="menu7" value="C:\Inetpub\wwwroot\menus\menu_emenu.xml" />
+    <add key="menu8" value="C:\Inetpub\wwwroot\menus\menu_afterMarket.xml" />
+    <add key="menu9" value="C:\Inetpub\wwwroot\menus\menu_salesMaker.xml" />
+    <add key="menu10" value="C:\Inetpub\wwwroot\menus\menu_Admin.xml" />
+    <add key="menu11" value="C:\Inetpub\wwwroot\menus\menu_Refer.xml" />
+    <add key="menu12" value="C:\Inetpub\wwwroot\menus\menu_leads.xml" />
+    <!--<add key="menuCAN1" value="C:\Inetpub\wwwroot\menus\menu_Hide_canada.xml" />
+	<add key="menuCAN2" value="C:\Inetpub\wwwroot\menus\menu_Main_canada.xml" />
+	<add key="menuCAN3" value="C:\Inetpub\wwwroot\menus\menu_admin_canada.xml" />
+	<add key="menuCAN4" value="C:\Inetpub\wwwroot\menus\menu_refer_canada.xml" />-->
+    <add key="cacheInScaleOut" value="False" />
+    <add key="scaleoutTimeOut" value="8" />
+    <add key="PilotDlrGrp" value="SITENAV" />
+    <add key="scaleoutTimeOut" value="1" />
+    <add key="PilotDlrGrp" value="SITENAV" />
+    <add key="cacheInScaleOut" value="False" />
+    <add key="useSqlServer" value="False" />
+    <add key="CCVersion" value="V3.16" />
+    <add key="BrowserIEOnly" value="False" />
+  </appSettings>
+  <dealertrack_commonsettings>
+    <setting environment="dev">
+      <common>
+        <OracleProvider>ADO</OracleProvider>
+        <dbconnectionstring>User ID=dtcn;password=dtcn;DATA SOURCE=DTCAN</dbconnectionstring>
+        <usererrormsg>Technical difficulties (Test) - Please call the help desk at 1-866-360-3863.</usererrormsg>
+        <isdebug>yes</isdebug>
+        <websitename>http://dtcweb1d.canada.dt.inc</websitename>
+        <schemalocation>http://dtcweb1d.canada.dt.inc</schemalocation>
+        <xdrdir>/schemas/</xdrdir>
+        <jf_virtualdirectory>collection</jf_virtualdirectory>
+        <jf_collectiondirectory>D:\jetform\central\server\data\</jf_collectiondirectory>
+        <dtctimezone>EST</dtctimezone>
+        <wheretolog>queue</wheretolog>
+        <!-- queue or textfile -->
+        <logqueuename>DIRECT=TCP:192.168.60.5\Private$\DealerTrackLogs</logqueuename>
+        <logmessagetype>recoverablemessage</logmessagetype>
+        <!--expressmessage or recoverablemessage -->
+        <logtextfoldername>D:\website\Adminlogs\</logtextfoldername>
+        <credit_bureau_active>yes</credit_bureau_active>
+        <requeueretry>2500</requeueretry>
+        <appv2_active>yes</appv2_active>
+        <gmac_active>no</gmac_active>
+        <gettickcount_active>yes</gettickcount_active>
+        <econtract_active>yes</econtract_active>
+        <billing_active>yes</billing_active>
+        <sendsilanisqname>DIRECT=OS:NDTDB1T\silpadorder</sendsilanisqname>
+        <logviewmax>500</logviewmax>
+        <logdownloadmax>10000</logdownloadmax>
+        <faxq>direct=os:192.168.60.5\appsubifax</faxq>
+        <padcosts>new</padcosts>
+        <padvendorname>S</padvendorname>
+        <sendinterlinkqname>DIRECT=TCP:192.168.60.5\interlinkpadorder</sendinterlinkqname>
+        <Bank1ChaseMergeActive>yes</Bank1ChaseMergeActive>
+        <sendtocwebqname>direct = OS:dtlender2q\Private$\cwdlrprofile</sendtocwebqname>
+        <countryhawk_exclude_ips>10,172.16,172.17,172.18,172.19,172.20,172.21,172.22,172.23,172.24,172.25,172.26,172.27,172.28,172.29,172.30,172.31,192.168</countryhawk_exclude_ips>
+        <ts_display_active>Y</ts_display_active>
+        <userstateconnectionstring>User ID=dtcn;password=dtcn;DATA SOURCE=DTCAN</userstateconnectionstring>
+        <compliance_active>Y</compliance_active>
+        <bpo_dbconnstring>User ID=xtra;password=NY5tore5afe;DATA SOURCE=BPO</bpo_dbconnstring>
+        <!-- HCCS-->
+        <dtproducts>AfterMarket</dtproducts>
+        <mydtapplicationname>DealerTrack</mydtapplicationname>
+        <dbconnectionstring_aftermarket>User ID=xtra;password=NY5tore5afe;DATA SOURCE=DTINBK</dbconnectionstring_aftermarket>
+        <dbconnectionstring_desklink>User ID=XTRA;password=NY5tore5afe;DATA SOURCE=DLINK</dbconnectionstring_desklink>
+        <dbconnectionstring_paymenttrack>User ID=dt_agent;password=dt_agent;DATA SOURCE=ALGDB</dbconnectionstring_paymenttrack>
+        <!-- Username only -->
+        <!-- <loginid>dtcndevall</loginid> -->
+        <loginid>vpate7714</loginid>
+        <!-- <loginid>vcfcu8</loginid> -->
+        <!-- <loginid>BD8987</loginid> -->
+        <!-- <loginid>vpate27</loginid> -->
+        <!-- Username only -->
+        <DST>AZ,HST,GST,VI,PR</DST>
+        <bh_stat_collection>3</bh_stat_collection>
+        <defaultlangcode>fr-ca</defaultlangcode>
+        <bh_implementation_type>CommonObjects</bh_implementation_type>
+        <nonredirectextensions>asmx</nonredirectextensions>
+        <enableprodsub50>NO</enableprodsub50>
+        <oneprod_multidomain>false</oneprod_multidomain>
+      </common>
+      <!--serversList>
+				<server name="localhost"></server>
+				<server name="dev.canada.dt.inc"></server>
+	  </serversList-->
+      <dealeradmin>
+        <optinlive>N</optinlive>
+        <faxoptin_interval>9999</faxoptin_interval>
+        <dp_questionnaire_interval>9999</dp_questionnaire_interval>
+      </dealeradmin>
+      <dealeralertsystem>
+        <alertdbconnectionstring protected="true">User ID=dt_Agent;password=dt_agent;DATA SOURCE=dtlog</alertdbconnectionstring>
+      </dealeralertsystem>
+      <PaymentTrack>
+        <ptdbconnectionstring protected="true">User ID=dt_agent;password=dt_agent;DATA SOURCE=ALGDB</ptdbconnectionstring>
+        <dtlogconnectionstring protected="true">User ID=dt_agent;password=dt_agent;DATA SOURCE=ALGDB</dtlogconnectionstring>
+      </PaymentTrack>
+      <DeskLink>
+        <dldbconnectionstring protected="true">User ID=XTRA;password=NY5tore5afe;DATA SOURCE=DLINK</dldbconnectionstring>
+      </DeskLink>
+      <inventory>
+        <inv_dbconnectionstring protected="true">User ID=xtra;password=NY5tore5afe;DATA SOURCE=DTINBK</inv_dbconnectionstring>
+      </inventory>
+      <compliance debug="false" extlog="no">
+        <cmpl_connectionstring protected="true">User ID=xtra;password=NY5tore5afe;DATA SOURCE=CMPL</cmpl_connectionstring>
+      </compliance>
+      <econview>
+        <sqlloaderparm protected="true">xtra/NY5tore5afe@DTCAN</sqlloaderparm>
+      </econview>
+      <billing>
+        <fin_dbconnectionstring protected="true">User ID=xtra;password=NY5tore5afe;DATA SOURCE=FIN</fin_dbconnectionstring>
+      </billing>
+      <contactus>
+        <contactusmailfrom>DTDealerMail@dealertrack.com</contactusmailfrom>
+      </contactus>
+      <broadcasttool>
+        <bmtallowedfunctions>viewapp,pullquote,status,home,pullburo,chgpswd</bmtallowedfunctions>
+      </broadcasttool>
+    </setting>
+  </dealertrack_commonsettings>
+  <configProtectedData defaultProvider="RsaProtectedConfigurationProvider">
+    <providers>
+      <add name="RsaProtectedConfigurationProvider" type="System.Configuration.RsaProtectedConfigurationProvider,System.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" description="Uses RsaCryptoServiceProvider to encrypt and decrypt" keyContainerName="NetFrameworkConfigurationKey" cspProviderName="" useMachineContainer="true" useOAEP="false" />
+      <add name="DataProtectionConfigurationProvider" type="System.Configuration.DpapiProtectedConfigurationProvider,System.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" description="Uses CryptProtectData and CryptUnProtectData Windows APIs to encrypt and decrypt" useMachineProtection="true" keyEntropy="" />
+    </providers>
+  </configProtectedData>
+  <runtime>
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+    </assemblyBinding>
+  </runtime>
+  <connectionStrings>
+    <add name="LocalSqlServer" connectionString="data source=.\SQLEXPRESS;Integrated Security=SSPI;AttachDBFilename=|DataDirectory|aspnetdb.mdf;User Instance=true" providerName="System.Data.SqlClient" />
+    <add name="OraAspNetConString" connectionString=" " />
+  </connectionStrings>
+  <system.data>
+    <DbProviderFactories>
+      <add name="Oracle Data Provider for .NET" invariant="Oracle.DataAccess.Client" description="Oracle Data Provider for .NET" type="Oracle.DataAccess.Client.OracleClientFactory, Oracle.DataAccess, Version=2.112.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342" />
+      <add name="Odbc Data Provider" invariant="System.Data.Odbc" description=".Net Framework Data Provider for Odbc" type="System.Data.Odbc.OdbcFactory, System.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+      <add name="OleDb Data Provider" invariant="System.Data.OleDb" description=".Net Framework Data Provider for OleDb" type="System.Data.OleDb.OleDbFactory, System.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+      <add name="OracleClient Data Provider" invariant="System.Data.OracleClient" description=".Net Framework Data Provider for Oracle" type="System.Data.OracleClient.OracleClientFactory, System.Data.OracleClient, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+      <add name="SqlClient Data Provider" invariant="System.Data.SqlClient" description=".Net Framework Data Provider for SqlServer" type="System.Data.SqlClient.SqlClientFactory, System.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    </DbProviderFactories>
+  </system.data>
+  <system.web>
+    <processModel autoConfig="true" />
+    <!--  validation="[SHA1|MD5|3DES]" -->
+    <machineKey validationKey="5F4263B470F22C0B2A76AB4AF1A8C90496F71EAFC3D36F400FF9E0B5201A7B9C45D968C0572EC031992E90A7BA21724536AB92530E05261784B85376FA26E44D" decryptionKey="D4AC345F2AA47770C53677222AC21EA91EDC6D892DC8603E" validation="3DES" />
+    <httpHandlers />
+    <membership>
+      <providers>
+        <add name="OracleMembershipProvider" type="Oracle.Web.Security.OracleMembershipProvider, Oracle.Web, Version=2.112.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342" connectionStringName="OraAspNetConString" applicationName="" enablePasswordRetrieval="false" enablePasswordReset="true" requiresQuestionAndAnswer="true" requiresUniqueEmail="false" passwordFormat="Hashed" maxInvalidPasswordAttempts="5" minRequiredPasswordLength="7" minRequiredNonalphanumericCharacters="1" passwordAttemptWindow="10" passwordStrengthRegularExpression="" />
+        <add name="AspNetSqlMembershipProvider" type="System.Web.Security.SqlMembershipProvider, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" connectionStringName="LocalSqlServer" enablePasswordRetrieval="false" enablePasswordReset="true" requiresQuestionAndAnswer="true" applicationName="/" requiresUniqueEmail="false" passwordFormat="Hashed" maxInvalidPasswordAttempts="5" minRequiredPasswordLength="7" minRequiredNonalphanumericCharacters="1" passwordAttemptWindow="10" passwordStrengthRegularExpression="" />
+      </providers>
+    </membership>
+    <profile>
+      <providers>
+        <add name="OracleProfileProvider" type="Oracle.Web.Profile.OracleProfileProvider, Oracle.Web, Version=2.112.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342" connectionStringName="OraAspNetConString" applicationName="" />
+        <add name="AspNetSqlProfileProvider" connectionStringName="LocalSqlServer" applicationName="/" type="System.Web.Profile.SqlProfileProvider, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      </providers>
+    </profile>
+    <roleManager>
+      <providers>
+        <add name="OracleRoleProvider" type="Oracle.Web.Security.OracleRoleProvider, Oracle.Web, Version=2.112.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342" connectionStringName="OraAspNetConString" applicationName="" />
+        <add name="AspNetSqlRoleProvider" connectionStringName="LocalSqlServer" applicationName="/" type="System.Web.Security.SqlRoleProvider, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+        <add name="AspNetWindowsTokenRoleProvider" applicationName="/" type="System.Web.Security.WindowsTokenRoleProvider, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      </providers>
+    </roleManager>
+    <siteMap>
+      <providers>
+        <add name="OracleSiteMapProvider" type="Oracle.Web.SiteMap.OracleSiteMapProvider, Oracle.Web, Version=2.112.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342" connectionStringName="OraAspNetConString" applicationName="" securityTrimmingEnabled="true" />
+      </providers>
+    </siteMap>
+    <webParts>
+      <personalization>
+        <providers>
+          <add name="OraclePersonalizationProvider" type="Oracle.Web.Personalization.OraclePersonalizationProvider, Oracle.Web, Version=2.112.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342" connectionStringName="OraAspNetConString" applicationName="" />
+        </providers>
+      </personalization>
+    </webParts>
+    <!-- <healthMonitoring> -->
+    <!-- <providers> -->
+    <!-- <add name="OracleWebEventProvider" type="Oracle.Web.Management.OracleWebEventProvider, Oracle.Web, Version=2.112.4.0, Culture=neutral, PublicKeyToken=89b483f429c47342" connectionStringName="OraAspNetConString" buffer="true" bufferMode="OracleNotification" /> -->
+    <!-- </providers> -->
+    <!-- </healthMonitoring> -->
+  </system.web>
+  <system.serviceModel>
+    <extensions>
+      <behaviorExtensions>
+        <add name="persistenceProvider" type="System.ServiceModel.Configuration.PersistenceProviderElement, System.WorkflowServices, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+        <add name="workflowRuntime" type="System.ServiceModel.Configuration.WorkflowRuntimeElement, System.WorkflowServices, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+        <add name="enableWebScript" type="System.ServiceModel.Configuration.WebScriptEnablingElement, System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+        <add name="webHttp" type="System.ServiceModel.Configuration.WebHttpElement, System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+      </behaviorExtensions>
+      <bindingElementExtensions>
+        <add name="webMessageEncoding" type="System.ServiceModel.Configuration.WebMessageEncodingElement, System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+        <add name="context" type="System.ServiceModel.Configuration.ContextBindingElementExtensionElement, System.WorkflowServices, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+      </bindingElementExtensions>
+      <bindingExtensions>
+        <add name="wsHttpContextBinding" type="System.ServiceModel.Configuration.WSHttpContextBindingCollectionElement, System.WorkflowServices, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+        <add name="netTcpContextBinding" type="System.ServiceModel.Configuration.NetTcpContextBindingCollectionElement, System.WorkflowServices, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+        <add name="webHttpBinding" type="System.ServiceModel.Configuration.WebHttpBindingCollectionElement, System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+        <add name="basicHttpContextBinding" type="System.ServiceModel.Configuration.BasicHttpContextBindingCollectionElement, System.WorkflowServices, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+      </bindingExtensions>
+    </extensions>
+    <client>
+      <metadata>
+        <policyImporters>
+          <extension type="System.ServiceModel.Channels.ContextBindingElementImporter, system.workflowservices, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+        </policyImporters>
+        <wsdlImporters>
+          <extension type="System.ServiceModel.Channels.ContextBindingElementImporter, system.workflowservices, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+        </wsdlImporters>
+      </metadata>
+    </client>
+    <commonBehaviors>
+      <endpointBehaviors>
+      </endpointBehaviors>
+      <serviceBehaviors>
+      </serviceBehaviors>
+    </commonBehaviors>
+  </system.serviceModel>
+</configuration>
