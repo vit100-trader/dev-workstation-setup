@@ -35,7 +35,7 @@ cd dev-workstation-setup
 setup.bat
 ```
 
-The script handles: repo cloning, IIS features, app pools, sites, machine.config files, tnsnames.ora, hosts file, wwwroot extraction, `C:\tools` directory, PATH setup, and PDF Upload Tool extraction.
+The script handles: repo cloning, IIS features, app pools, sites, machine.config files, tnsnames.ora, hosts file, wwwroot extraction, `C:\tools` directory, PATH setup, PDF Upload Tool extraction, and Posting Tool extraction.
 
 > **IIS:** The script enables IIS automatically via DISM (takes 5-10 minutes and may appear stuck at certain percentages — just let it run). This requires **Windows Pro or Enterprise** — Windows Home does not support IIS. After the script finishes, verify IIS is running by opening http://localhost in a browser. You should see the IIS Welcome page or one of the configured DTN sites. If the page doesn't load, open **IIS Manager** (`inetmgr`) and check that the sites and app pools are listed.
 
@@ -59,6 +59,7 @@ After the script finishes, follow the manual steps it prints out.
 | hosts | Adds `localhostcgw` entry |
 | NuGet | Downloads `nuget.exe` to `C:\tools` |
 | PDF Upload Tool | Extracts `Tools/PdfUploadTool.zip` to `C:\tools\PdfUploadTool`. Uses aliases from `tnsnames.ora` for different environments |
+| Posting Tool | Extracts `Tools/PostingTool.zip` to `C:\tools\PostingTool`. Emulates lender responses for deal submissions during development |
 
 ---
 
@@ -70,7 +71,11 @@ These can't be automated — do them after running the script.
 
 The script extracts `PdfUploadTool.zip` to `C:\tools\PdfUploadTool`. Inside you'll find `32bits` and `64bits` folders. Use the **32-bit version** unless you know otherwise — the Oracle client is most likely 32-bit, and the tool's architecture must match.
 
-### 2. JFrog NuGet Source
+### 2. Posting Tool
+
+The script extracts `PostingTool.zip` to `C:\tools\PostingTool`. This tool emulates lender responses when submitting deals, so you don't have to wait for real lender replies during development. See the [WebPostingTool repo](https://github.com/tdr-dealertrack/WebPostingTool) for details, or ask QA or another dev for usage tips.
+
+### 3. JFrog NuGet Source
 
 `nuget.exe` is already in `C:\tools` (downloaded by the script). Now configure the JFrog feed:
 
@@ -82,7 +87,7 @@ The script extracts `PdfUploadTool.zip` to `C:\tools\PdfUploadTool`. Inside you'
 nuget source add -Name "dtncan-nuget-local" -Source "https://traderca.jfrog.io/artifactory/api/nuget/v3/dtncan-nuget-local" -Username YOUR_EMAIL -Password YOUR_API_KEY
 ```
 
-### 3. VPN
+### 4. VPN
 
 See the [AWS VPN Transition to Okta](https://trader.atlassian.net/wiki/spaces/CLOUD/pages/4891476045/AWS+Client+VPN+Transition+to+AS24+Okta+Authentication) Confluence page.
 
@@ -90,13 +95,13 @@ See the [AWS VPN Transition to Okta](https://trader.atlassian.net/wiki/spaces/CL
 2. Download profiles from the [self-service portal](https://self-service.clientvpn.amazonaws.com/)
 3. Import `.ovpn` files via File > Manage Profiles
 
-### 4. Oracle SQL Developer
+### 5. Oracle SQL Developer
 
 [Download](https://www.oracle.com/ca-en/database/sqldeveloper/technologies/download/) the Windows version with JDK included.
 
 Pre-configured connections for DEV and QA are in `oracle/sqlDeveloperConnections.json`. Import via File > Import Connections, select the JSON file, and enter `123` when prompted for the decryption password.
 
-### 5. Build in Visual Studio
+### 6. Build in Visual Studio
 
 All repos are cloned automatically by `setup.bat`. Open `C:\dtnsourcecode\DTN.Core.Base` in Visual Studio **as Admin** and build. If that works, your setup is good.
 

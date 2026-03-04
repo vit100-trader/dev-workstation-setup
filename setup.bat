@@ -316,6 +316,20 @@ if exist "C:\tools\PdfUploadTool\1.0.2.2" (
 )
 
 :: ----------------------------------------------------------
+:: 13. Extract Posting Tool
+:: ----------------------------------------------------------
+set /a STEP+=1
+echo.
+echo [%STEP%] Extracting Posting Tool to C:\tools\PostingTool...
+powershell -NoProfile -Command "Expand-Archive -Path '%REPO_DIR%Tools\PostingTool.zip' -DestinationPath 'C:\tools\PostingTool' -Force" >nul 2>&1
+if exist "C:\tools\PostingTool\XMLPostingTool.exe" (
+    echo       OK
+) else (
+    echo       ERROR: Failed to extract PostingTool.zip
+    set /a ERRORS+=1
+)
+
+:: ----------------------------------------------------------
 :: Summary
 :: ----------------------------------------------------------
 echo.
@@ -333,7 +347,12 @@ echo    1. PDF Upload Tool
 echo       Extracted to C:\tools\PdfUploadTool\1.0.2.2
 echo       Use the 32bits version ^(Oracle client is most likely 32-bit^).
 echo.
-echo    2. Configure JFrog NuGet source
+echo    2. Posting Tool
+echo       Extracted to C:\tools\PostingTool
+echo       Emulates lender responses for deal submissions.
+echo       Ask QA or another dev for usage details.
+echo.
+echo    3. Configure JFrog NuGet source
 echo       nuget.exe is already in C:\tools ^(downloaded by this script^).
 echo       Sign in at https://traderca.jfrog.io with SAML SSO
 echo       Generate API key, then run:
@@ -341,10 +360,10 @@ echo       nuget source add -Name "dtncan-nuget-local" ^
 echo         -Source "https://traderca.jfrog.io/artifactory/api/nuget/v3/dtncan-nuget-local" ^
 echo         -Username YOUR_EMAIL -Password YOUR_API_KEY
 echo.
-echo    3. Set up VPN
+echo    4. Set up VPN
 echo       See vpn\README.md
 echo.
-echo    4. Build in Visual Studio
+echo    5. Build in Visual Studio
 echo       Open DTN.Core.Base in Visual Studio as Admin and build.
 echo       If that works, your setup is good.
 echo.

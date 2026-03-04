@@ -202,8 +202,10 @@
         <dbconnectionstring_desklink>User ID=XTRA;password=NY5tore5afe;DATA SOURCE=DLINK</dbconnectionstring_desklink>
         <dbconnectionstring_paymenttrack>User ID=dt_agent;password=dt_agent;DATA SOURCE=ALGDB</dbconnectionstring_paymenttrack>
         <!-- Username only -->
-        <!-- <loginid>dtcndevall</loginid> -->
-        <loginid>vpate7714</loginid>
+        <loginid>vmark624</loginid>
+        <!-- <loginid>auser8417</loginid>  automation testing user-->
+        <!-- <loginid>dtcndevall</loginid> dtn admin user-->
+        <!-- <loginid>vpate7714</loginid> -->
         <!-- <loginid>vcfcu8</loginid> -->
         <!-- <loginid>BD8987</loginid> -->
         <!-- <loginid>vpate27</loginid> -->
