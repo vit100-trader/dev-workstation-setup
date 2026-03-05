@@ -50,7 +50,7 @@ After the script finishes, follow the manual steps it prints out.
 | Create directories | `C:\dtnsourcecode` (source code) and `C:\tools` (standalone utilities like `nuget.exe` that need to be on PATH) |
 | PATH | Adds `C:\tools` to system PATH so utilities placed there are available from any terminal |
 | Clone repos | Clones all 48 repos from `tdr-dealertrack` to `C:\dtnsourcecode` (skips existing) |
-| IIS | Enables IIS with all relevant features via DISM |
+| IIS + MSMQ | Enables IIS and MSMQ with all relevant features via DISM |
 | App pools | Imports `iis/apppools.xml` via appcmd |
 | Sites | Removes Default Web Site, imports `iis/sites.xml` |
 | wwwroot | Extracts `wwwroot.zip` to `C:\inetpub\` |
