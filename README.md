@@ -73,7 +73,7 @@ The script extracts `PdfUploadTool.zip` to `C:\tools\PdfUploadTool`. Inside you'
 
 ### 2. Posting Tool
 
-The script extracts `PostingTool.zip` to `C:\tools\PostingTool`. This tool emulates lender responses when submitting deals, so you don't have to wait for real lender replies during development. See the [WebPostingTool repo](https://github.com/tdr-dealertrack/WebPostingTool) for details, or ask QA or another dev for usage tips.
+The script extracts `PostingTool.zip` to `C:\tools\PostingTool`. This tool emulates lender responses when submitting deals, so you don't have to wait for real lender replies during development. See the [DTN.XMLPostingTool repo](https://github.com/tdr-dealertrack/DTN.XMLPostingTool) for details, or ask QA or another dev for usage tips.
 
 ### 3. JFrog NuGet Source
 
