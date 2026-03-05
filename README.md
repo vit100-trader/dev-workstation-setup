@@ -26,7 +26,13 @@ git clone https://github.com/vit100-trader/dev-workstation-setup.git
 **Install Oracle client before running the script** — this way `tnsnames.ora` gets copied automatically on the first run:
 
 1. Extract `dev-workstation-setup\oracle\win32_11gR2_client.zip` — the 32-bit client is the required one (`win64_11gR2_client.zip` is included just in case someone needs it)
-2. Run `setup.exe` > Custom > install to `C:\Oracle` (the script expects this exact path for copying `tnsnames.ora`)
+2. Run `setup.exe` from the `client` folder (it may take up to 2 minutes for the setup screen to appear; try running as Administrator if nothing happens)
+3. Select **Custom** as the installation type
+4. On the language selection screen, leave defaults and click Next
+5. Set **Oracle Base** to `C:\Oracle` — the software location will auto-fill as `C:\Oracle\product\11.2.0\client_1` (the script expects this exact path for copying `tnsnames.ora`)
+6. Click Next through the remaining screens and let setup finish
+
+See [screenshots on the wiki page](https://trader.atlassian.net/wiki/spaces/DE/pages/4212031615) for each step of the Oracle installer.
 
 Then run the script:
 
