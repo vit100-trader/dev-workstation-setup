@@ -25,7 +25,7 @@ git clone https://github.com/vit100-trader/dev-workstation-setup.git
 
 **Install Oracle client before running the script** — this way `tnsnames.ora` gets copied automatically on the first run:
 
-1. Extract `dev-workstation-setup\oracle\win64_11gR2_client.zip` (or `win32_11gR2_client.zip` for 32-bit)
+1. Extract `dev-workstation-setup\oracle\win32_11gR2_client.zip` — the 32-bit client is the required one (`win64_11gR2_client.zip` is included just in case someone needs it)
 2. Run `setup.exe` > Custom > install to `C:\Oracle` (the script expects this exact path for copying `tnsnames.ora`)
 
 Then run the script:
