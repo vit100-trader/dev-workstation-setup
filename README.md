@@ -63,6 +63,14 @@ Every step checks what's already in place and skips it, so you can safely re-run
 
 Open the machine.config files and replace the `<loginid>` value with your own username. Two alternatives are included as comments: `auser8417` (automation testing) and `dtcndevall` (DTN admin) — uncomment one of those instead if needed.
 
+The files live at:
+
+```
+C:\Windows\Microsoft.NET\Framework\v2.0.50727\CONFIG\machine.config
+C:\Windows\Microsoft.NET\Framework64\v2.0.50727\CONFIG\machine.config
+C:\Windows\Microsoft.NET\Framework\v4.0.30319\Config\machine.config
+```
+
 ### JFrog NuGet Source
 
 `nuget.exe` is already in `C:\tools`. Now configure the feed:

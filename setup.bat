@@ -418,6 +418,10 @@ echo.
 echo  YOU STILL NEED TO DO THESE MANUALLY:
 echo.
 echo    1. machine.config — update ^<loginid^> with your username
+echo       Files to edit:
+echo         %windir%\Microsoft.NET\Framework\v2.0.50727\CONFIG\machine.config
+echo         %windir%\Microsoft.NET\Framework64\v2.0.50727\CONFIG\machine.config
+echo         %windir%\Microsoft.NET\Framework\v4.0.30319\Config\machine.config
 echo.
 echo    2. Configure JFrog NuGet source
 echo       nuget.exe is already in C:\tools ^(downloaded by this script^).
