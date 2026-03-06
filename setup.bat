@@ -25,9 +25,24 @@ echo ============================================================
 echo.
 
 :: ----------------------------------------------------------
-:: 1. Create directory structure
+:: 1. Check winget availability
 :: ----------------------------------------------------------
 set /a STEP+=1
+echo [%STEP%] Checking winget...
+where winget >nul 2>&1
+if !errorlevel! neq 0 (
+    echo       WARNING: winget not found. Git, Git LFS, and AWS VPN Client must be installed manually.
+    set "HAS_WINGET=0"
+) else (
+    echo       OK
+    set "HAS_WINGET=1"
+)
+
+:: ----------------------------------------------------------
+:: 2. Create directory structure
+:: ----------------------------------------------------------
+set /a STEP+=1
+echo.
 echo [%STEP%] Creating directories...
 if not exist "C:\dtnsourcecode" mkdir "C:\dtnsourcecode"
 if not exist "C:\tools" mkdir "C:\tools"
@@ -35,7 +50,7 @@ echo       C:\dtnsourcecode - OK
 echo       C:\tools - OK
 
 :: ----------------------------------------------------------
-:: 2. Add C:\tools to system PATH if not already there
+:: 3. Add C:\tools to system PATH if not already there
 :: ----------------------------------------------------------
 set /a STEP+=1
 echo.
@@ -55,7 +70,46 @@ if !errorlevel! neq 0 (
 )
 
 :: ----------------------------------------------------------
-:: 3. Clone all repos referenced by IIS sites config
+:: 4. Install Git (if missing)
+:: ----------------------------------------------------------
+set /a STEP+=1
+echo.
+echo [%STEP%] Checking Git...
+where git >nul 2>&1
+if !errorlevel! neq 0 (
+    if "!HAS_WINGET!"=="1" (
+        echo       Installing Git...
+        winget install --id Git.Git -e --accept-source-agreements --accept-package-agreements
+    ) else (
+        echo       ERROR: Git not found. Install from https://git-scm.com/downloads
+        set /a ERRORS+=1
+    )
+) else (
+    echo       Already installed.
+)
+
+:: ----------------------------------------------------------
+:: 5. Install Git LFS (if missing)
+:: ----------------------------------------------------------
+set /a STEP+=1
+echo.
+echo [%STEP%] Checking Git LFS...
+git lfs version >nul 2>&1
+if !errorlevel! neq 0 (
+    if "!HAS_WINGET!"=="1" (
+        echo       Installing Git LFS...
+        winget install --id GitHub.GitLFS -e --accept-source-agreements --accept-package-agreements
+    ) else (
+        echo       ERROR: Git LFS not found. Install from https://git-lfs.com
+        set /a ERRORS+=1
+    )
+) else (
+    echo       Already installed.
+)
+git lfs install >nul 2>&1
+
+:: ----------------------------------------------------------
+:: 6. Clone all repos referenced by IIS sites config
 :: ----------------------------------------------------------
 set /a STEP+=1
 echo.
@@ -83,6 +137,7 @@ for %%R in (
     DTN.Cascading
     DTN.CBEServices
     DTN.CommonGateway
+    DTN.CommonObjects
     DTN.Connectivity
     DTN.Core.Base
     DTN.CreditBureau
@@ -119,6 +174,7 @@ for %%R in (
     DTN.LenderAdmin
     DTN.Payout
     DTN.ProgramManagement
+    DTN.ReferenceLib
     DTN.ReportingService
     DTN.SiteAdmin
     DTN.Status
@@ -145,7 +201,7 @@ if !CLONE_FAIL! gtr 0 (
 :skip_clone
 
 :: ----------------------------------------------------------
-:: 4. Enable IIS
+:: 7. Enable IIS
 :: ----------------------------------------------------------
 set /a STEP+=1
 echo.
@@ -158,7 +214,7 @@ if !errorlevel! neq 0 (
 )
 
 :: ----------------------------------------------------------
-:: 5. Import IIS app pools
+:: 8. Import IIS app pools
 :: ----------------------------------------------------------
 set /a STEP+=1
 echo.
@@ -176,7 +232,7 @@ if exist "%APPCMD%" (
 )
 
 :: ----------------------------------------------------------
-:: 6. Import IIS sites
+:: 9. Import IIS sites
 :: ----------------------------------------------------------
 set /a STEP+=1
 echo.
@@ -195,7 +251,7 @@ if exist "%APPCMD%" (
 )
 
 :: ----------------------------------------------------------
-:: 7. Extract wwwroot
+:: 10. Extract wwwroot
 :: ----------------------------------------------------------
 set /a STEP+=1
 echo.
@@ -218,7 +274,7 @@ if exist "%REPO_DIR%wwwroot\wwwroot.zip" (
 )
 
 :: ----------------------------------------------------------
-:: 8. machine.config files (backup + copy)
+:: 11. machine.config files (backup + copy)
 :: ----------------------------------------------------------
 set /a STEP+=1
 echo.
@@ -248,7 +304,7 @@ for %%F in (
 )
 
 :: ----------------------------------------------------------
-:: 9. Oracle tnsnames.ora
+:: 12. Oracle tnsnames.ora
 :: ----------------------------------------------------------
 set /a STEP+=1
 echo.
@@ -267,7 +323,7 @@ if exist "%ORA_DIR%" (
 )
 
 :: ----------------------------------------------------------
-:: 10. Hosts file
+:: 13. Hosts file
 :: ----------------------------------------------------------
 set /a STEP+=1
 echo.
@@ -283,7 +339,7 @@ if !errorlevel! neq 0 (
 )
 
 :: ----------------------------------------------------------
-:: 11. Download NuGet CLI
+:: 14. Download NuGet CLI
 :: ----------------------------------------------------------
 set /a STEP+=1
 echo.
@@ -298,7 +354,7 @@ if exist "C:\tools\nuget.exe" (
 )
 
 :: ----------------------------------------------------------
-:: 12. Extract PDF Upload Tool
+:: 15. Extract PDF Upload Tool
 :: ----------------------------------------------------------
 set /a STEP+=1
 echo.
@@ -316,7 +372,7 @@ if exist "C:\tools\PdfUploadTool\1.0.2.2" (
 )
 
 :: ----------------------------------------------------------
-:: 13. Extract Posting Tool
+:: 16. Extract Posting Tool
 :: ----------------------------------------------------------
 set /a STEP+=1
 echo.
@@ -327,6 +383,24 @@ if exist "C:\tools\PostingTool\XMLPostingTool.exe" (
 ) else (
     echo       ERROR: Failed to extract PostingTool.zip
     set /a ERRORS+=1
+)
+
+:: ----------------------------------------------------------
+:: 17. Install AWS VPN Client
+:: ----------------------------------------------------------
+set /a STEP+=1
+echo.
+echo [%STEP%] Checking AWS VPN Client...
+if "!HAS_WINGET!"=="1" (
+    winget list --id Amazon.AWSVPNClient >nul 2>&1
+    if !errorlevel! neq 0 (
+        echo       Installing AWS VPN Client...
+        winget install --id Amazon.AWSVPNClient -e --accept-source-agreements --accept-package-agreements
+    ) else (
+        echo       Already installed.
+    )
+) else (
+    echo       SKIP: Install AWS VPN Client manually from https://aws.amazon.com/vpn/client-vpn-download/
 )
 
 :: ----------------------------------------------------------
@@ -343,16 +417,9 @@ echo ============================================================
 echo.
 echo  YOU STILL NEED TO DO THESE MANUALLY:
 echo.
-echo    1. PDF Upload Tool
-echo       Extracted to C:\tools\PdfUploadTool\1.0.2.2
-echo       Use the 32bits version ^(Oracle client is most likely 32-bit^).
+echo    1. machine.config — update ^<loginid^> with your username
 echo.
-echo    2. Posting Tool
-echo       Extracted to C:\tools\PostingTool
-echo       Emulates lender responses for deal submissions.
-echo       Ask QA or another dev for usage details.
-echo.
-echo    3. Configure JFrog NuGet source
+echo    2. Configure JFrog NuGet source
 echo       nuget.exe is already in C:\tools ^(downloaded by this script^).
 echo       Sign in at https://traderca.jfrog.io with SAML SSO
 echo       Generate API key, then run:
@@ -360,10 +427,10 @@ echo       nuget source add -Name "dtncan-nuget-local" ^
 echo         -Source "https://traderca.jfrog.io/artifactory/api/nuget/v3/dtncan-nuget-local" ^
 echo         -Username YOUR_EMAIL -Password YOUR_API_KEY
 echo.
-echo    4. Set up VPN
-echo       See vpn\README.md
+echo    3. VPN — import profiles from the self-service portal
+echo       https://self-service.clientvpn.amazonaws.com/
 echo.
-echo    5. Build in Visual Studio
+echo    4. Build in Visual Studio
 echo       Open DTN.Core.Base in Visual Studio as Admin and build.
 echo       If that works, your setup is good.
 echo.

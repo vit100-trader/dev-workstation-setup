@@ -1,16 +1,19 @@
 # Dealertrack Developer Workstation Setup
 
-Everything you need to set up a new DTN dev machine. Config files, installers, and an automated setup script — all in one place.
+This repo automates most of the DTN dev machine setup. For the full walkthrough with screenshots, see the [wiki page](https://trader.atlassian.net/wiki/spaces/DE/pages/4212031615).
 
 ## Quick Start
 
-Open a **Command Prompt as Administrator** (right-click > "Run as administrator"). All steps below should be run from this same Admin prompt.
+Open a **Command Prompt as Administrator**, then:
 
-```
-winget install GitHub.GitLFS
-```
+**1. Install the Oracle client** (must be done before the script so `tnsnames.ora` gets copied automatically):
 
-Close and reopen your Admin command prompt (needed so Git picks up the newly installed LFS — otherwise `git lfs` fails with "lfs is not a git command"), then:
+- Extract `oracle\win32_11gR2_client.zip` from this repo (32-bit is the required one)
+- Run `setup.exe` from the extracted `client` folder
+- Select **Custom** install, set Oracle Base to `C:\Oracle`
+- See [wiki screenshots](https://trader.atlassian.net/wiki/spaces/DE/pages/4212031615) for each installer step
+
+**2. Clone this repo:**
 
 ```
 mkdir C:\dtnsourcecode
@@ -19,98 +22,90 @@ git lfs install
 git clone https://github.com/vit100-trader/dev-workstation-setup.git
 ```
 
-> **Note:** Git LFS is required — the repo contains large files (Oracle installers, wwwroot.zip) tracked via LFS. Cloning may take a while as it downloads ~3 GB of LFS content. The `winget` command above installs Git LFS. If `winget` is not available, download from https://git-lfs.com.
+> If Git or Git LFS aren't installed yet, the script will install them via `winget` on Step 4/5. In that case, just download the repo as a ZIP from GitHub, extract it, and run the script. It will install Git and LFS, then you can re-run it to clone the repos properly.
 
-> **Important:** All repos must be cloned to `C:\dtnsourcecode`. The IIS sites config (`sites.xml`) has hardcoded physical paths pointing there. If you use a different location, you'll need to update `sites.xml` and re-import the IIS sites manually.
-
-**Install Oracle client before running the script** — this way `tnsnames.ora` gets copied automatically on the first run:
-
-1. Extract `dev-workstation-setup\oracle\win32_11gR2_client.zip` — the 32-bit client is the required one (`win64_11gR2_client.zip` is included just in case someone needs it)
-2. Run `setup.exe` from the `client` folder (it may take up to 2 minutes for the setup screen to appear; try running as Administrator if nothing happens)
-3. Select **Custom** as the installation type
-4. On the language selection screen, leave defaults and click Next
-5. Set **Oracle Base** to `C:\Oracle` — the software location will auto-fill as `C:\Oracle\product\11.2.0\client_1` (the script expects this exact path for copying `tnsnames.ora`)
-6. Click Next through the remaining screens and let setup finish
-
-See [screenshots on the wiki page](https://trader.atlassian.net/wiki/spaces/DE/pages/4212031615) for each step of the Oracle installer.
-
-Then run the script:
+**3. Run the script:**
 
 ```
 cd dev-workstation-setup
 setup.bat
 ```
 
-The script handles: repo cloning, IIS features, app pools, sites, machine.config files, tnsnames.ora, hosts file, wwwroot extraction, `C:\tools` directory, PATH setup, PDF Upload Tool extraction, and Posting Tool extraction.
-
-> **IIS:** The script enables IIS automatically via DISM (takes 5-10 minutes and may appear stuck at certain percentages — just let it run). This requires **Windows Pro or Enterprise** — Windows Home does not support IIS. After the script finishes, verify IIS is running by opening http://localhost in a browser. You should see the IIS Welcome page or one of the configured DTN sites. If the page doesn't load, open **IIS Manager** (`inetmgr`) and check that the sites and app pools are listed.
-
-After the script finishes, follow the manual steps it prints out.
-
----
+> **Windows Home** does not support IIS. You need Windows Pro or Enterprise.
 
 ## What the Script Does
 
 | Step | What happens |
 |---|---|
-| Create directories | `C:\dtnsourcecode` (source code) and `C:\tools` (standalone utilities like `nuget.exe` that need to be on PATH) |
-| PATH | Adds `C:\tools` to system PATH so utilities placed there are available from any terminal |
-| Clone repos | Clones all 48 repos from `tdr-dealertrack` to `C:\dtnsourcecode` (skips existing) |
-| IIS + MSMQ | Enables IIS and MSMQ with all relevant features via DISM |
+| winget check | Detects whether `winget` is available for automatic installs |
+| Create directories | `C:\dtnsourcecode` and `C:\tools` |
+| PATH | Adds `C:\tools` to system PATH |
+| Git | Installs Git via winget if missing |
+| Git LFS | Installs Git LFS via winget if missing, runs `git lfs install` |
+| Clone repos | Clones all 50 repos from `tdr-dealertrack` (skips existing) |
+| IIS + MSMQ | Enables IIS and MSMQ features via DISM |
 | App pools | Imports `iis/apppools.xml` via appcmd |
 | Sites | Removes Default Web Site, imports `iis/sites.xml` |
 | wwwroot | Extracts `wwwroot.zip` to `C:\inetpub\` |
 | machine.config | Backs up originals (.bak), copies all 3 configs |
-| tnsnames.ora | Copies to Oracle client dir (Oracle should already be installed per Quick Start) |
+| tnsnames.ora | Copies to Oracle client dir |
 | hosts | Adds `localhostcgw` entry |
 | NuGet | Downloads `nuget.exe` to `C:\tools` |
-| PDF Upload Tool | Extracts `Tools/PdfUploadTool.zip` to `C:\tools\PdfUploadTool`. Uses aliases from `tnsnames.ora` for different environments |
-| Posting Tool | Extracts `Tools/PostingTool.zip` to `C:\tools\PostingTool`. Emulates lender responses for deal submissions during development |
+| PDF Upload Tool | Extracts to `C:\tools\PdfUploadTool` |
+| Posting Tool | Extracts to `C:\tools\PostingTool` |
+| AWS VPN Client | Installs via winget if missing |
 
-> **machine.config login:** After the script copies the `machine.config` files, open them and replace the `<loginid>` value with your own username. Two commented-out alternatives are also included: `auser8417` (automation testing user) and `dtcndevall` (DTN admin user) — uncomment one of these instead if needed for your scenario.
+Every step checks what's already in place and skips it, so you can safely re-run the script.
 
----
+## After the Script
 
-## Manual Steps
+### machine.config — update loginid
 
-These can't be automated — do them after running the script.
+Open the machine.config files and replace the `<loginid>` value with your own username. Two alternatives are included as comments: `auser8417` (automation testing) and `dtcndevall` (DTN admin) — uncomment one of those instead if needed.
 
-### 1. PDF Upload Tool
+### JFrog NuGet Source
 
-The script extracts `PdfUploadTool.zip` to `C:\tools\PdfUploadTool`. Inside you'll find `32bits` and `64bits` folders. Use the **32-bit version** unless you know otherwise — the Oracle client is most likely 32-bit, and the tool's architecture must match.
+`nuget.exe` is already in `C:\tools`. Now configure the feed:
 
-### 2. Posting Tool
-
-The script extracts `PostingTool.zip` to `C:\tools\PostingTool`. This tool emulates lender responses when submitting deals, so you don't have to wait for real lender replies during development. See the [DTN.XMLPostingTool repo](https://github.com/tdr-dealertrack/DTN.XMLPostingTool) for details, or ask QA or another dev for usage tips.
-
-### 3. JFrog NuGet Source
-
-`nuget.exe` is already in `C:\tools` (downloaded by the script). Now configure the JFrog feed:
-
-1. Go to [JFrog](https://traderca.jfrog.io/ui/packages), sign in with SAML SSO
-3. Generate API key (top-right > Edit Profile)
-4. Run:
+1. Sign in at [JFrog](https://traderca.jfrog.io) with SAML SSO
+2. Generate an API key (top-right > Edit Profile)
+3. Run:
 
 ```
 nuget source add -Name "dtncan-nuget-local" -Source "https://traderca.jfrog.io/artifactory/api/nuget/v3/dtncan-nuget-local" -Username YOUR_EMAIL -Password YOUR_API_KEY
 ```
 
-### 4. VPN
+### VPN — import profiles
 
-See the [AWS VPN Transition to Okta](https://trader.atlassian.net/wiki/spaces/CLOUD/pages/4891476045/AWS+Client+VPN+Transition+to+AS24+Okta+Authentication) Confluence page.
+The script installs the AWS VPN Client. You still need to import your connection profiles:
 
-1. Install [AWS VPN Client](https://aws.amazon.com/vpn/client-vpn-download/)
-2. Download profiles from the [self-service portal](https://self-service.clientvpn.amazonaws.com/)
-3. Import `.ovpn` files via File > Manage Profiles
+1. Go to the [self-service portal](https://self-service.clientvpn.amazonaws.com/) and download `.ovpn` files
+2. In the VPN client, import them via File > Manage Profiles
 
-### 5. Oracle SQL Developer
+See the [AWS VPN Transition to Okta](https://trader.atlassian.net/wiki/spaces/CLOUD/pages/4891476045/AWS+Client+VPN+Transition+to+AS24+Okta+Authentication) page for details.
 
-[Download](https://www.oracle.com/ca-en/database/sqldeveloper/technologies/download/) the Windows version with JDK included.
+### Oracle SQL Developer
 
-Pre-configured connections for DEV and QA are in `oracle/sqlDeveloperConnections.json`. Import via File > Import Connections, select the JSON file, and enter `123` when prompted for the decryption password.
+[Download](https://www.oracle.com/ca-en/database/sqldeveloper/technologies/download/) the Windows version with JDK included. Import connections from `oracle/sqlDeveloperConnections.json` (File > Import Connections, decryption password: `123`).
 
-### 6. Build in Visual Studio
+### PDF Upload Tool
 
-All repos are cloned automatically by `setup.bat`. Open `C:\dtnsourcecode\DTN.Core.Base` in Visual Studio **as Admin** and build. If that works, your setup is good.
+Extracted to `C:\tools\PdfUploadTool\1.0.2.2`. Use the **32-bit version** (must match the Oracle client architecture).
 
+### Posting Tool
 
+Extracted to `C:\tools\PostingTool`. Fakes lender responses so you don't have to wait for real ones during development. See the [DTN.XMLPostingTool repo](https://github.com/tdr-dealertrack/DTN.XMLPostingTool) or ask QA for usage tips.
+
+### Build in Visual Studio
+
+Open `C:\dtnsourcecode\DTN.Core.Base` in Visual Studio **as Admin** and build. If it works, your setup is good.
+
+## Troubleshooting
+
+**Windows Home — no IIS:** IIS requires Windows Pro or Enterprise. Windows Home does not have it.
+
+**Git LFS files missing:** If large files (Oracle installers, wwwroot.zip) show as small pointer files, run `git lfs pull` from the repo directory.
+
+**Oracle install — use "Oracle" not "Oracle86":** The script expects `C:\Oracle\product\11.2.0\client_1`. If you accidentally installed to a different path, either reinstall or update the `ORA_DIR` variable in `setup.bat`.
+
+> All repos must live under `C:\dtnsourcecode`. The IIS sites config (`sites.xml`) has hardcoded paths pointing there.
