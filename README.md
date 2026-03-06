@@ -67,6 +67,8 @@ After the script finishes, follow the manual steps it prints out.
 | PDF Upload Tool | Extracts `Tools/PdfUploadTool.zip` to `C:\tools\PdfUploadTool`. Uses aliases from `tnsnames.ora` for different environments |
 | Posting Tool | Extracts `Tools/PostingTool.zip` to `C:\tools\PostingTool`. Emulates lender responses for deal submissions during development |
 
+> **machine.config login:** After the script copies the `machine.config` files, open them and replace the `<loginid>` value with your own username. Two commented-out alternatives are also included: `auser8417` (automation testing user) and `dtcndevall` (DTN admin user) — uncomment one of these instead if needed for your scenario.
+
 ---
 
 ## Manual Steps
