@@ -109,6 +109,29 @@ if !errorlevel! neq 0 (
 git lfs install >nul 2>&1
 
 :: ----------------------------------------------------------
+:: 5b. Auto-detect Git LFS pointer files and fetch real content
+:: ----------------------------------------------------------
+set "LFS_CHECK_FILE=%REPO_DIR%wwwroot\wwwroot.zip"
+if exist "!LFS_CHECK_FILE!" (
+    for %%A in ("!LFS_CHECK_FILE!") do set "LFS_FILE_SIZE=%%~zA"
+    if !LFS_FILE_SIZE! lss 1024 (
+        echo.
+        echo       WARNING: wwwroot.zip appears to be a Git LFS pointer ^(!LFS_FILE_SIZE! bytes^).
+        echo       This means the repo was cloned before Git LFS was installed.
+        echo       Running 'git lfs pull' to fetch real files...
+        pushd "%REPO_DIR%"
+        git lfs pull
+        if !errorlevel! neq 0 (
+            echo       ERROR: git lfs pull failed. Run it manually from %REPO_DIR%
+            set /a ERRORS+=1
+        ) else (
+            echo       OK - LFS files downloaded.
+        )
+        popd
+    )
+)
+
+:: ----------------------------------------------------------
 :: 6. Clone all repos referenced by IIS sites config
 :: ----------------------------------------------------------
 set /a STEP+=1
