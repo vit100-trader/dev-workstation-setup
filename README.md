@@ -15,6 +15,10 @@ Open a **Command Prompt as Administrator**, then:
 
 **2. Clone this repo:**
 
+> **⚠ Important:** You **must** run `git lfs install` before `git clone`. This repo contains ~1.8 GB of large files tracked by Git LFS (Oracle installers, wwwroot.zip). If you clone without LFS, those files will be tiny pointer files and the setup will fail.
+>
+> If you already cloned without LFS: run `git lfs install` then `git lfs pull` from the repo directory to fetch the real files.
+
 ```
 mkdir C:\dtnsourcecode
 cd C:\dtnsourcecode
@@ -112,7 +116,12 @@ Open `C:\dtnsourcecode\DTN.Core.Base` in Visual Studio **as Admin** and build. I
 
 **Windows Home — no IIS:** IIS requires Windows Pro or Enterprise. Windows Home does not have it.
 
-**Git LFS files missing:** If large files (Oracle installers, wwwroot.zip) show as small pointer files, run `git lfs pull` from the repo directory.
+**Git LFS files missing:** If large files (Oracle installers, wwwroot.zip) are tiny (~130 bytes) pointer files instead of the real binaries:
+
+1. Install Git LFS if you haven't: `winget install GitHub.GitLFS`
+2. Run `git lfs install` (one-time per machine)
+3. From the repo directory, run `git lfs pull` to download the real files
+4. Re-run `setup.bat` — the script also auto-detects LFS pointers and runs `git lfs pull` for you
 
 **Oracle install — use "Oracle" not "Oracle86":** The script expects `C:\Oracle\product\11.2.0\client_1`. If you accidentally installed to a different path, either reinstall or update the `ORA_DIR` variable in `setup.bat`.
 
