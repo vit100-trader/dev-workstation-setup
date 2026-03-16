@@ -147,7 +147,6 @@ for %%R in (
     DTN.ExternalComm.AMC
     DTN.ExternalComm.ATB
     DTN.ExternalComm.Base
-    DTN.ExternalComm.BMO
     DTN.ExternalComm.BMW
     DTN.ExternalComm.BNC
     DTN.ExternalComm.BNS

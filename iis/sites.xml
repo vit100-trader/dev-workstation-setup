@@ -124,10 +124,6 @@
         <virtualDirectoryDefaults />
         <virtualDirectory path="/" physicalPath="C:\inetpub\wwwroot\DTCanada\ExternalComm" />
       </application>
-      <application path="/DTCanada/ExternalComm/ExternalCommBMO" applicationPool="CommonGateway">
-        <virtualDirectoryDefaults />
-        <virtualDirectory path="/" physicalPath="C:\dtnsourcecode\DTN.ExternalComm.BMO\ExternalCommBMO" />
-      </application>
       <application path="/DTCanada/ExternalComm/ExternalCommTransUnion" applicationPool="ASP.NET V2.0 Integrated">
         <virtualDirectoryDefaults />
         <virtualDirectory path="/" physicalPath="C:\dtnsourcecode\DTN.ExternalComm.Transunion\ExternalCommTransUnion" />
