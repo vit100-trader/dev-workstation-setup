@@ -6,14 +6,7 @@ This repo automates most of the DTN dev machine setup. For the full walkthrough 
 
 Open a **Command Prompt as Administrator**, then:
 
-**1. Install the Oracle client** (must be done before the script so `tnsnames.ora` gets copied automatically):
-
-- Extract `oracle\win32_11gR2_client.zip` from this repo (32-bit is the required one)
-- Run `setup.exe` from the extracted `client` folder
-- Select **Custom** install, set Oracle Base to `C:\Oracle`
-- See [wiki screenshots](https://trader.atlassian.net/wiki/spaces/DE/pages/4212031615) for each installer step
-
-**2. Clone this repo:**
+**1. Clone this repo:**
 
 > **⚠ Important:** You **must** run `git lfs install` before `git clone`. This repo contains ~1.8 GB of large files tracked by Git LFS (Oracle installers, wwwroot.zip). If you clone without LFS, those files will be tiny pointer files and the setup will fail.
 >
@@ -27,6 +20,13 @@ git clone https://github.com/vit100-trader/dev-workstation-setup.git
 ```
 
 > If Git or Git LFS aren't installed yet, the script will install them via `winget` on Step 4/5. In that case, just download the repo as a ZIP from GitHub, extract it, and run the script. It will install Git and LFS, then you can re-run it to clone the repos properly.
+
+**2. Install the Oracle client** (must be done before the script so `tnsnames.ora` gets copied automatically):
+
+- Extract `oracle\win32_11gR2_client.zip` from the cloned repo (32-bit is the required one)
+- Run `setup.exe` from the extracted `client` folder
+- Select **Custom** install, set Oracle Base to `C:\Oracle`
+- See [wiki screenshots](https://trader.atlassian.net/wiki/spaces/DE/pages/4212031615) for each installer step
 
 **3. Run the script:**
 
