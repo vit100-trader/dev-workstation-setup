@@ -108,6 +108,27 @@ Extracted to `C:\tools\PdfUploadTool\1.0.2.2`. Use the **32-bit version** (must 
 
 Extracted to `C:\tools\PostingTool`. Fakes lender responses so you don't have to wait for real ones during development. See the [DTN.XMLPostingTool repo](https://github.com/tdr-dealertrack/DTN.XMLPostingTool) or ask QA for usage tips.
 
+### CreditBureau
+
+#### SOSS installation
+
+Install the 32-bit SOSS package before running CreditBureau. The application uses 32-bit native dependencies, so install the 32-bit version even on a 64-bit workstation.
+
+Download the 32-bit `soss_setup32.msi` installer from the [Tools](https://github.com/vit100-trader/dev-workstation-setup/tree/CreditBureauInstallation/Tools)  installer folder, then run it as Administrator. Complete the installation before building or opening the application through IIS.
+
+If the application reports that `soss_svcdotnet.DLL` or `soss_svccli.dll` cannot be loaded, verify that the 32-bit SOSS installation completed and that its native dependencies are available to the IIS worker process. Copying a managed DLL into `bin` alone may not be sufficient.
+
+#### IIS configuration
+
+The local CreditBureau application must run in an IIS application pool with these settings:
+
+| Setting | Value |
+|---|---|
+| .NET CLR Version | `v4.0` |
+| Enable 32-Bit Applications | `True` |
+| Managed Pipeline Mode | `Classic` |
+| Identity | `NetworkService` |
+
 ### Build in Visual Studio
 
 Open `C:\dtnsourcecode\DTN.Core.Base` in Visual Studio **as Admin** and build. If it works, your setup is good.
