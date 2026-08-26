@@ -306,6 +306,7 @@ set "NET20_32=%windir%\Microsoft.NET\Framework\v2.0.50727\CONFIG"
 set "NET20_64=%windir%\Microsoft.NET\Framework64\v2.0.50727\CONFIG"
 set "NET40_32=%windir%\Microsoft.NET\Framework\v4.0.30319\Config"
 
+set "BACKUP_TIMESTAMP=%DATE:/=%_%TIME::=%"
 for %%F in (
     "%NET20_32%|machine.config_v2.0_net32|v2.0 32-bit"
     "%NET20_64%|machine.config_v2.0_net64|v2.0 64-bit"
@@ -313,14 +314,15 @@ for %%F in (
 ) do (
     for /f "tokens=1,2,3 delims=|" %%A in (%%F) do (
         if exist "%%~A\machine.config" (
-            copy /Y "%%~A\machine.config" "%%~A\machine.config.bak" >nul
+            set "BACKUP_FILE=%%~A\machine.config.bak.!BACKUP_TIMESTAMP!"
+            copy /Y "%%~A\machine.config" "!BACKUP_FILE!" >nul
         )
         copy /Y "%REPO_DIR%dotnet\%%B" "%%~A\machine.config" >nul
         if !errorlevel! neq 0 (
             echo       ERROR: %%C failed
             set /a ERRORS+=1
         ) else (
-            echo       %%C - OK ^(backup saved as .bak^)
+            echo       %%C - OK, backup: !BACKUP_FILE!
         )
     )
 )
