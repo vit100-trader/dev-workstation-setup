@@ -48,10 +48,10 @@ setup.bat
 | Git LFS | Installs Git LFS via winget if missing, runs `git lfs install` |
 | Clone repos | Clones all 50 repos from `tdr-dealertrack` (skips existing) |
 | IIS + MSMQ | Enables IIS and MSMQ features via DISM |
-| App pools | Imports `iis/apppools.xml` via appcmd |
+| App pools | Adds each pool from `iis/apppools.xml` independently via appcmd; existing pools are skipped |
 | Sites | Removes Default Web Site, imports `iis/sites.xml` |
 | wwwroot | Extracts `wwwroot.zip` to `C:\inetpub\` |
-| machine.config | Backs up originals (.bak), copies all 3 configs |
+| machine.config | Creates timestamped backups of the original, then copies all 3 configs |
 | tnsnames.ora | Copies to Oracle client dir |
 | hosts | Adds `localhostcgw` entry |
 | NuGet | Downloads `nuget.exe` to `C:\tools` |
@@ -59,7 +59,7 @@ setup.bat
 | Posting Tool | Extracts to `C:\tools\PostingTool` |
 | AWS VPN Client | Installs via winget if missing |
 
-Every step checks what's already in place and skips it, so you can safely re-run the script.
+Every step checks what's already in place and skips it, so you can safely re-run the script. But a full re-run may overwrite existing configuration. In particular, `machine.config` is backed up and replaced, while `tnsnames.ora` is replaced without a backup.
 
 ## After the Script
 

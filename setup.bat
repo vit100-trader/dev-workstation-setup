@@ -242,9 +242,32 @@ set /a STEP+=1
 echo.
 echo [%STEP%] Importing IIS application pools...
 if exist "%APPCMD%" (
-    "%APPCMD%" add apppool /in < "%REPO_DIR%iis\apppools.xml"
+    powershell -NoProfile -Command ^
+        "$ErrorActionPreference = 'Stop';" ^
+        "$appCmd = '%APPCMD%';" ^
+        "[xml]$config = Get-Content -LiteralPath '%REPO_DIR%iis\apppools.xml' -Raw;" ^
+        "$failed = $false;" ^
+        "foreach ($pool in @($config.appcmd.APPPOOL)) {" ^
+        "    $name = [string]$pool.'APPPOOL.NAME';" ^
+        "    & $appCmd list apppool $name >$null 2>&1;" ^
+        "    if ($LASTEXITCODE -eq 0) {" ^
+        "        Write-Host ('SKIP: ' + $name + ' already exists; settings were not changed.');" ^
+        "        continue;" ^
+        "    }" ^
+        "    $inputXml = '<appcmd>' + $pool.OuterXml + '</appcmd>';" ^
+        "    $addOutput = $inputXml | & $appCmd add apppool /in 2>&1;" ^
+        "    if ($LASTEXITCODE -eq 0) {" ^
+        "        Write-Host ('      ADDED: ' + $name);" ^
+        "    } else {" ^
+        "        Write-Host ('      FAIL: ' + $name);" ^
+        "        Write-Host ('        ' + $addOutput);" ^
+        "        $failed = $true;" ^
+        "    }" ^
+        "}" ^
+        "if ($failed) { exit 1 }"
     if !errorlevel! neq 0 (
-        echo WARNING: Some app pools may already exist. That's fine.
+        echo ERROR: Failed to import one or more IIS application pools.
+        set /a ERRORS+=1
     ) else (
         echo       OK
     )
