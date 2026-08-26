@@ -114,7 +114,16 @@ Extracted to `C:\tools\PostingTool`. Fakes lender responses so you don't have to
 
 Install the 32-bit SOSS package before running CreditBureau. The application uses 32-bit native dependencies, so install the 32-bit version even on a 64-bit workstation.
 
-Download the 32-bit `soss_setup32.msi` installer from the [SOSS installer SharePoint folder](https://as24netcan-my.sharepoint.com/:f:/g/personal/vitaliy_markitanov_autoscout24_com/IgCeD4S44007Q5NnAlSzcw_8AXNmu2M8UflzwPOZqPVIqKc?e=s6GCOW), then run it as Administrator. The installer is hosted outside GitHub because it is larger than GitHub's 25 MB file limit. Complete the installation before building or opening the application through IIS.
+The 32-bit installer is included in this repository at [`Tools/soss_setup32.zip`](Tools/soss_setup32.zip). Download or clone the repository using Git, extract the ZIP, and run `soss_setup32.msi` as Administrator. Complete the installation before building or opening the application through IIS. The ZIP is tracked in Git so the setup can be obtained with the rest of the workstation tools.
+
+If the installer is not present in your checkout, pull the latest branch or fetch the repository again before continuing. Do not commit the extracted MSI separately; keep the distributable ZIP under `Tools`.
+
+During installation, follow these wizard steps:
+
+1. Click **Next**.
+2. Accept the terms in the License Agreement, then click **Next**.
+3. Select **SOSS Full Install**.
+4. Click **Install**, then click **Finish**.
 
 If the application reports that `soss_svcdotnet.DLL` or `soss_svccli.dll` cannot be loaded, verify that the 32-bit SOSS installation completed and that its native dependencies are available to the IIS worker process. Copying a managed DLL into `bin` alone may not be sufficient.
 
