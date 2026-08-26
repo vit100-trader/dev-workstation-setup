@@ -63,7 +63,7 @@ if !errorlevel! neq 0 (
         echo ERROR: Failed to update PATH
         set /a ERRORS+=1
     ) else (
-        echo       OK (restart your terminal to pick it up)
+        echo       OK ^(restart your terminal to pick it up^)
     )
 ) else (
     echo       Already in PATH.
