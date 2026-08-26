@@ -116,14 +116,16 @@ Install the 32-bit SOSS package before running CreditBureau. The application use
 
 The 32-bit installer is included in this repository at [`Tools/soss_setup32.zip`](Tools/soss_setup32.zip). Download or clone the repository using Git, extract the ZIP, and run `soss_setup32.msi` as Administrator. Complete the installation before building or opening the application through IIS. The ZIP is tracked in Git so the setup can be obtained with the rest of the workstation tools.
 
+Run the unattended full installation from an Administrator PowerShell or Command Prompt:
+
+```powershell
+msiexec.exe /i .\soss_setup32.msi /quiet INSTALLLEVEL=1000
+```
+
+`INSTALLLEVEL=1000` installs the full SOSS server and all available features, equivalent to selecting **SOSS Full Install** in the wizard. Wait for `msiexec.exe` to finish before building or opening CreditBureau through IIS.
+
 If the installer is not present in your checkout, pull the latest branch or fetch the repository again before continuing. Do not commit the extracted MSI separately; keep the distributable ZIP under `Tools`.
 
-During installation, follow these wizard steps:
-
-1. Click **Next**.
-2. Accept the terms in the License Agreement, then click **Next**.
-3. Select **SOSS Full Install**.
-4. Click **Install**, then click **Finish**.
 
 If the application reports that `soss_svcdotnet.DLL` or `soss_svccli.dll` cannot be loaded, verify that the 32-bit SOSS installation completed and that its native dependencies are available to the IIS worker process. Copying a managed DLL into `bin` alone may not be sufficient.
 
