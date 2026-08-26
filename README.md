@@ -155,6 +155,14 @@ Open `C:\dtnsourcecode\DTN.Core.Base` in Visual Studio **as Admin** and build. I
 
 ## Troubleshooting
 
+**Issues with solution not building**
+
+You might need to install certain dotnet versions. This being one of them: https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net452-developer-pack-offline-installer
+
+![alt text](image.png)
+
+These can be found in the Visual Studio Installer and are also required
+
 **Windows Home — no IIS:** IIS requires Windows Pro or Enterprise. Windows Home does not have it.
 
 **Git LFS files missing:** If large files (Oracle installers, wwwroot.zip) are tiny (~130 bytes) pointer files instead of the real binaries:
