@@ -114,7 +114,7 @@ Extracted to `C:\tools\PostingTool`. Fakes lender responses so you don't have to
 
 Install the 32-bit SOSS package before running CreditBureau. The application uses 32-bit native dependencies, so install the 32-bit version even on a 64-bit workstation.
 
-Download the 32-bit `soss_setup32.msi` installer from the [Tools](https://github.com/vit100-trader/dev-workstation-setup/tree/CreditBureauInstallation/Tools)  installer folder, then run it as Administrator. Complete the installation before building or opening the application through IIS.
+Download the 32-bit `soss_setup32.msi` installer from the [SOSS installer SharePoint folder](https://as24netcan-my.sharepoint.com/:f:/g/personal/vitaliy_markitanov_autoscout24_com/IgCeD4S44007Q5NnAlSzcw_8AXNmu2M8UflzwPOZqPVIqKc?e=s6GCOW), then run it as Administrator. The installer is hosted outside GitHub because it is larger than GitHub's 25 MB file limit. Complete the installation before building or opening the application through IIS.
 
 If the application reports that `soss_svcdotnet.DLL` or `soss_svccli.dll` cannot be loaded, verify that the 32-bit SOSS installation completed and that its native dependencies are available to the IIS worker process. Copying a managed DLL into `bin` alone may not be sufficient.
 
@@ -128,6 +128,15 @@ The local CreditBureau application must run in an IIS application pool with thes
 | Enable 32-Bit Applications | `True` |
 | Managed Pipeline Mode | `Classic` |
 | Identity | `NetworkService` |
+#### Build and debug workflow
+
+1. Clone or pull the latest code for `DTN.Core.Base` and `DTN.CreditBureau` before building.
+2. Open the required solution in Visual Studio as Administrator and restore the configured NuGet packages.
+3. Build Core.Base first when CreditBureau depends on updated shared assemblies, then build the CreditBureau solution.
+4. Confirm the generated DLLs and their dependencies are copied to the `bin` folder used by the IIS application.
+5. In IIS Manager, verify that the CreditBureau application points to the intended local folder, such as `C:\DTNSourceCode\DTN.CreditBureau\DTC.CreditBureau.Web`, rather than an older `wwwroot` deployment folder.
+6. Confirm the application pool settings above, then browse to the application and attach the Visual Studio debugger to the worker process when troubleshooting.
+7. Recycle the application pool after copying new assemblies or changing configuration. Clear browser session/cookies when stale serialized session data causes dataset cast errors.
 
 ### Build in Visual Studio
 
