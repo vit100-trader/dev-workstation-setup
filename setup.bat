@@ -329,7 +329,7 @@ set "NET20_32=%windir%\Microsoft.NET\Framework\v2.0.50727\CONFIG"
 set "NET20_64=%windir%\Microsoft.NET\Framework64\v2.0.50727\CONFIG"
 set "NET40_32=%windir%\Microsoft.NET\Framework\v4.0.30319\Config"
 
-set "BACKUP_TIMESTAMP=%DATE:/=%_%TIME::=%"
+for /f %%I in ('powershell -NoProfile -Command "Get-Date -Format yyyyMMdd_HHmmss"') do set "BACKUP_TIMESTAMP=%%I"
 for %%F in (
     "%NET20_32%|machine.config_v2.0_net32|v2.0 32-bit"
     "%NET20_64%|machine.config_v2.0_net64|v2.0 64-bit"
