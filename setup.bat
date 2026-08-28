@@ -63,7 +63,7 @@ if !errorlevel! neq 0 (
         echo ERROR: Failed to update PATH
         set /a ERRORS+=1
     ) else (
-        echo       OK (restart your terminal to pick it up)
+        echo       OK ^(restart your terminal to pick it up^)
     )
 ) else (
     echo       Already in PATH.
@@ -242,9 +242,32 @@ set /a STEP+=1
 echo.
 echo [%STEP%] Importing IIS application pools...
 if exist "%APPCMD%" (
-    "%APPCMD%" add apppool /in < "%REPO_DIR%iis\apppools.xml"
+    powershell -NoProfile -Command ^
+        "$ErrorActionPreference = 'Stop';" ^
+        "$appCmd = '%APPCMD%';" ^
+        "[xml]$config = Get-Content -LiteralPath '%REPO_DIR%iis\apppools.xml' -Raw;" ^
+        "$failed = $false;" ^
+        "foreach ($pool in @($config.appcmd.APPPOOL)) {" ^
+        "    $name = [string]$pool.'APPPOOL.NAME';" ^
+        "    & $appCmd list apppool $name >$null 2>&1;" ^
+        "    if ($LASTEXITCODE -eq 0) {" ^
+        "        Write-Host ('SKIP: ' + $name + ' already exists; settings were not changed.');" ^
+        "        continue;" ^
+        "    }" ^
+        "    $inputXml = '<appcmd>' + $pool.OuterXml + '</appcmd>';" ^
+        "    $addOutput = $inputXml | & $appCmd add apppool /in 2>&1;" ^
+        "    if ($LASTEXITCODE -eq 0) {" ^
+        "        Write-Host ('      ADDED: ' + $name);" ^
+        "    } else {" ^
+        "        Write-Host ('      FAIL: ' + $name);" ^
+        "        Write-Host ('        ' + $addOutput);" ^
+        "        $failed = $true;" ^
+        "    }" ^
+        "}" ^
+        "if ($failed) { exit 1 }"
     if !errorlevel! neq 0 (
-        echo WARNING: Some app pools may already exist. That's fine.
+        echo ERROR: Failed to import one or more IIS application pools.
+        set /a ERRORS+=1
     ) else (
         echo       OK
     )
@@ -306,6 +329,7 @@ set "NET20_32=%windir%\Microsoft.NET\Framework\v2.0.50727\CONFIG"
 set "NET20_64=%windir%\Microsoft.NET\Framework64\v2.0.50727\CONFIG"
 set "NET40_32=%windir%\Microsoft.NET\Framework\v4.0.30319\Config"
 
+for /f %%I in ('powershell -NoProfile -Command "Get-Date -Format yyyyMMdd_HHmmss"') do set "BACKUP_TIMESTAMP=%%I"
 for %%F in (
     "%NET20_32%|machine.config_v2.0_net32|v2.0 32-bit"
     "%NET20_64%|machine.config_v2.0_net64|v2.0 64-bit"
@@ -313,14 +337,15 @@ for %%F in (
 ) do (
     for /f "tokens=1,2,3 delims=|" %%A in (%%F) do (
         if exist "%%~A\machine.config" (
-            copy /Y "%%~A\machine.config" "%%~A\machine.config.bak" >nul
+            set "BACKUP_FILE=%%~A\machine.config.bak.!BACKUP_TIMESTAMP!"
+            copy /Y "%%~A\machine.config" "!BACKUP_FILE!" >nul
         )
         copy /Y "%REPO_DIR%dotnet\%%B" "%%~A\machine.config" >nul
         if !errorlevel! neq 0 (
             echo       ERROR: %%C failed
             set /a ERRORS+=1
         ) else (
-            echo       %%C - OK ^(backup saved as .bak^)
+            echo       %%C - OK, backup: !BACKUP_FILE!
         )
     )
 )
