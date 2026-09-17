@@ -108,6 +108,47 @@ Extracted to `C:\tools\PdfUploadTool\1.0.2.2`. Use the **32-bit version** (must 
 
 Extracted to `C:\tools\PostingTool`. Fakes lender responses so you don't have to wait for real ones during development. See the [DTN.XMLPostingTool repo](https://github.com/tdr-dealertrack/DTN.XMLPostingTool) or ask QA for usage tips.
 
+### CreditBureau
+
+#### SOSS installation
+
+Install the 32-bit SOSS package before running CreditBureau. The application uses 32-bit native dependencies, so install the 32-bit version even on a 64-bit workstation.
+
+The 32-bit installer is included in this repository at [`Tools/soss_setup32.msi`](Tools/soss_setup32.msi). Download or clone the repository using Git, then run the MSI as Administrator. Complete the installation before building or opening the application through IIS.
+
+Run the unattended full installation from an Administrator PowerShell or Command Prompt:
+
+```powershell
+msiexec.exe /i .\soss_setup32.msi /quiet INSTALLLEVEL=1000
+```
+
+`INSTALLLEVEL=1000` installs the full SOSS server and all available features, equivalent to selecting **SOSS Full Install** in the wizard. Wait for `msiexec.exe` to finish before building or opening CreditBureau through IIS.
+
+If the installer is not present in your checkout, pull the latest branch or fetch the repository again before continuing. Keep the MSI under `Tools`.
+
+
+If the application reports that `soss_svcdotnet.DLL` or `soss_svccli.dll` cannot be loaded, verify that the 32-bit SOSS installation completed and that its native dependencies are available to the IIS worker process. Copying a managed DLL into `bin` alone may not be sufficient.
+
+#### IIS configuration
+
+The local CreditBureau application must run in an IIS application pool with these settings:
+
+| Setting | Value |
+|---|---|
+| .NET CLR Version | `v4.0` |
+| Enable 32-Bit Applications | `True` |
+| Managed Pipeline Mode | `Classic` |
+| Identity | `NetworkService` |
+#### Build and debug workflow
+
+1. Clone or pull the latest code for `DTN.Core.Base` and `DTN.CreditBureau` before building.
+2. Open the required solution in Visual Studio as Administrator and restore the configured NuGet packages.
+3. Build Core.Base first when CreditBureau depends on updated shared assemblies, then build the CreditBureau solution.
+4. Confirm the generated DLLs and their dependencies are copied to the `bin` folder used by the IIS application.
+5. In IIS Manager, verify that the CreditBureau application points to the intended local folder, such as `C:\DTNSourceCode\DTN.CreditBureau\DTC.CreditBureau.Web`, rather than an older `wwwroot` deployment folder.
+6. Confirm the application pool settings above, then browse to the application and attach the Visual Studio debugger to the worker process when troubleshooting.
+7. Recycle the application pool after copying new assemblies or changing configuration. Clear browser session/cookies when stale serialized session data causes dataset cast errors.
+
 ### Build in Visual Studio
 
 Open `C:\dtnsourcecode\DTN.Core.Base` in Visual Studio **as Admin** and build. If it works, your setup is good.
