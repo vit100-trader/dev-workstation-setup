@@ -6,7 +6,7 @@
 # Hostname......: travis-xp (Laptop)
 # Date..........: Apr 3rd 2007 VV 
 # Location......: Lake Success - NY
-################
+###############
 
 DTCAN_QA=
   (DESCRIPTION=
@@ -24,7 +24,7 @@ DTCAN_UAT=
   (DESCRIPTION=
     (ADDRESS=
       (PROTOCOL=TCP)
-      (HOST=DTCAN-UAT-DB.CLXNYFBNRHGE.CA-CENTRAL-1.RDS.AMAZONAWS.COM)
+      (HOST=DTCAN-UAT-DB-EC2.DTNNP.DEALERTRACK.CA)
       (PORT=1521)
     )
     (CONNECT_DATA=
